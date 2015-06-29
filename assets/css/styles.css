@@ -1,3 +1,8 @@
+.text-highlight{
+  color: #8ea173;
+  font-size: 32px;
+}
+
 .alert-info {
   background-color: #CBE7A5;
   margin-top: 20%;

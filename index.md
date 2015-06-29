@@ -76,11 +76,11 @@ $(function() {
 
 ## The Validation Problem
 
-* As sports analysts and fans, we think a lot about performance and how athletes stack up against their competitors
+> * As sports analysts and fans, we think a lot about performance and how athletes stack up against their competitors
 
-* Yet, attention to the comparative performance of prediction models in sport is often absent (at least from the scholarly literature)
+> * Yet, attention to the comparative performance of prediction models in sport is often absent (at least from the scholarly literature)
 
-* Tennis is no exception
+> * Tennis is no exception
 
 
 --- &twocol
@@ -340,7 +340,7 @@ $(function() {
 
 > * Calibration was generally good but there was a wide range in discriminatory performance
 
-> * The <u>Prize probit model</u> had excellent accuracy and superior discriminatory power compared to competitors 
+> * The <b class="text-highlight">Prize probit model</b> had excellent accuracy and superior discriminatory power compared to competitors 
 
 > * Factors like prize earnings and head-to-head outcomes have important predictive value even after account for player rankings
 
