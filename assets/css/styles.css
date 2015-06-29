@@ -1,7 +1,14 @@
 .alert-info {
   background-color: #CBE7A5;
-  margin-top: 30%;
+  margin-top: 20%;
   padding: 5%;
+  text-align: center;
+}
+
+.alert-nopad {
+  background-color: #CBE7A5;
+  padding: 1%;
+  margin-bottom: 5%;
   text-align: center;
 }
 
@@ -27,7 +34,7 @@ article p, article li, article li.build, section p, section li{
 
 slide:not(.segue) h2{
   font-family: 'Spinnaker', cursive;
-  padding-bottom: 3%;
+  padding-bottom: 2%;
 }
 
 

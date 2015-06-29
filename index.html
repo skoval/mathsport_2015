@@ -50,7 +50,7 @@
     <br/>
     <br/>
     <h2>Is there a GOAT for tennis prediction?</h2>
-    <p>Stephanie A. Kovalchik, skovalch@rand.org<br/>2015 Mathsport International</p>
+    <p>Stephanie A. Kovalchik, skovalch@rand.org<br/>2015 MathSport International</p>
   </hgroup>
   <article></article>  
     <aside class="gbar">
@@ -157,7 +157,7 @@ $(function() {
   <article data-timings="">
     <ul>
 <li><p>As sports analysts and fans, we think a lot about performance and how athletes stack up against their competitors</p></li>
-<li><p>Yet, attention to the comparative performance of prediction models in sport is often absent (at least from scholarly literature)</p></li>
+<li><p>Yet, attention to the comparative performance of prediction models in sport is often absent (at least from the scholarly literature)</p></li>
 <li><p>Tennis is no exception</p></li>
 </ul>
 
@@ -197,9 +197,14 @@ $(function() {
     <h2>Objectives &amp; Design Overview</h2>
   </hgroup>
   <article data-timings="">
-    <ul class = "build incremental">
-<li><p>The purpose of this study was to identify published models to predict the winner of a professional singles match in tennis</p></li>
-<li><p>The study design had 3 phases:</p>
+    <div class="alert alert-nopad">
+  <h3 style="color: #000000;">
+    <i>The purpose of this study was to identify published models to predict the winner of a professional singles match in tennis</i>
+  </h3>
+</div>
+
+<ul class = "build incremental">
+<li>The study design had 3 phases:
 
 <ol>
 <li>Search for prediction models</li>
@@ -357,11 +362,10 @@ $(function() {
 </slide>
 
 <slide class="" id="slide-14" style="background:;">
-  <hgroup>
-    <h2>Regression Model Predictors</h2>
-  </hgroup>
   <article data-timings="">
-    <table><thead>
+    <h2 style="padding: 0%;">Regression Model Predictors</h2>
+
+<table><thead>
 <tr>
 <th align="center">Predictor</th>
 <th align="center">Logistic</th>
@@ -703,8 +707,19 @@ $(function() {
     <h2>Calibration</h2>
   </hgroup>
   <article data-timings="">
-    <p><img src="assets/fig/unnamed-chunk-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" /></p>
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><img src="assets/fig/unnamed-chunk-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" /></p>
 
+</div>
+<div style='float:right;width:48%;'>
+  <ul>
+<li><p>The predictor-rich probit models were the most accurate</p></li>
+<li><p>Point-based models tend to underestimate</p></li>
+<li><p>Underestimation was worse when models included player-specific parameters</p></li>
+</ul>
+
+</div>
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -714,8 +729,18 @@ $(function() {
     <h2>Discrimination: AUC</h2>
   </hgroup>
   <article data-timings="">
-    <p><img src="assets/fig/unnamed-chunk-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" /></p>
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><img src="assets/fig/unnamed-chunk-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" /></p>
 
+</div>
+<div style='float:right;width:48%;'>
+  <ul>
+<li><p>Point-based models had similar, poor discrimination</p></li>
+<li><p>Models that considered more than player rank, generally had good discriminatory power</p></li>
+</ul>
+
+</div>
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -725,8 +750,18 @@ $(function() {
     <h2>Discrimination: Mean Probability Difference</h2>
   </hgroup>
   <article data-timings="">
-    <p><img src="assets/fig/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" /></p>
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><img src="assets/fig/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" /></p>
 
+</div>
+<div style='float:right;width:48%;'>
+  <ul>
+<li><p>In terms of the gap in win prediction, the predictor-rich probit models were standouts</p></li>
+<li><p>All remaining models had similar, narrow gaps in the difference in win probabilities</p></li>
+</ul>
+
+</div>
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -839,7 +874,7 @@ $(function() {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='Regression Model Predictors'>
+        data-slide=14 title=''>
          14
       </a>
     </li>

@@ -2,7 +2,7 @@
 title: Comparative performance of models to forecast match wins in professional tennis
 subtitle: Is there a GOAT for tennis prediction?
 author: Stephanie A. Kovalchik, skovalch@rand.org
-job: 2015 Mathsport International
+job: 2015 MathSport International
 framework: io2012
 theme: swiss
 highlighter: highlight.js
@@ -78,7 +78,7 @@ $(function() {
 
 * As sports analysts and fans, we think a lot about performance and how athletes stack up against their competitors
 
-* Yet, attention to the comparative performance of prediction models in sport is often absent (at least from scholarly literature)
+* Yet, attention to the comparative performance of prediction models in sport is often absent (at least from the scholarly literature)
 
 * Tennis is no exception
 
@@ -101,7 +101,11 @@ $(function() {
 
 ## Objectives & Design Overview
 
-> * The purpose of this study was to identify published models to predict the winner of a professional singles match in tennis
+<div class="alert alert-nopad">
+  <h3 style="color: #000000;">
+    <i>The purpose of this study was to identify published models to predict the winner of a professional singles match in tennis</i>
+  </h3>
+</div>
 
 > * The study design had 3 phases:
   1. Search for prediction models
@@ -177,7 +181,7 @@ $(function() {
 
 ---
 
-## Regression Model Predictors
+<h2 style="padding: 0%;">Regression Model Predictors</h2>
 
 |Predictor | Logistic | Basic probit |Probit plus | Prize Probit |
 |:--------:|:--------:|:--------:|:--------:|:--------:|
@@ -281,23 +285,50 @@ $(function() {
 <h2>Performance Findings</h2>
 </div>
 
----
+--- &twocol
 
 ## Calibration
 
+*** =left
+
 <img src="assets/fig/unnamed-chunk-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" />
 
----
+*** =right
+
+* The predictor-rich probit models were the most accurate
+
+* Point-based models tend to underestimate
+
+* Underestimation was worse when models included player-specific parameters
+
+
+--- &twocol
 
 ## Discrimination: AUC
 
+*** =left
+
 <img src="assets/fig/unnamed-chunk-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
 
----
+*** =right
+
+* Point-based models had similar, poor discrimination
+
+* Models that considered more than player rank, generally had good discriminatory power
+
+--- &twocol
 
 ## Discrimination: Mean Probability Difference
 
+*** =left
+
 <img src="assets/fig/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
+
+*** =right
+
+* In terms of the gap in win prediction, the predictor-rich probit models were standouts
+
+* All remaining models had similar, narrow gaps in the difference in win probabilities
 
 ---
 
