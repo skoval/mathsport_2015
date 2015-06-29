@@ -1,0 +1,3052 @@
+y <- players[1]
+y
+data <- subset(combined, PlayerKey == y)
+head(data)
+matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & date$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)
+head(start)
+start <- mdy("1-1-2013") + weeks(1:52)#
+stop <- start + weeks(52)
+OverallStats <- lapply(players[1:2], function(y){#
+	data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & date$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)#
+	lapply(matches, function(x){#
+		index <- seq(1, nrow(x), by = 2)#
+		x[, "Total Return Points Won"] <- as.numeric(x[, "Total Return Points Won"])#
+		x[, "Total Return Points"] <- as.numeric(x[, "Total Return Points"])#
+		x[, "Total Service Points Won"] <- as.numeric(x[, "Total Service Points Won"])#
+		x[, "Total Service Points"] <- as.numeric(x[, "Total Service Points"])#
+		output <- ddply(x[index,], c("Player"), summarize,#
+			ServicePointsWon = sum(`Total Service Points Won`),#
+			ServicePoints = sum(`Total Service Points`),#
+			ReturnPointsWon = sum(`Total Return Points Won`),#
+			ReturnPoints = sum(`Total Return Points`)#
+		)#
+	output$ProbReturn <- output$ReturnPointsWon / output$ReturnPoints#
+	output$ProbServe <- output$ServicePointsWon / output$ServicePoints#
+	output#
+	})#
+#
+})
+OverallStats <- lapply(players[1:2], function(y){#
+	data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & data$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)#
+	lapply(matches, function(x){#
+		index <- seq(1, nrow(x), by = 2)#
+		x[, "Total Return Points Won"] <- as.numeric(x[, "Total Return Points Won"])#
+		x[, "Total Return Points"] <- as.numeric(x[, "Total Return Points"])#
+		x[, "Total Service Points Won"] <- as.numeric(x[, "Total Service Points Won"])#
+		x[, "Total Service Points"] <- as.numeric(x[, "Total Service Points"])#
+		output <- ddply(x[index,], c("Player"), summarize,#
+			ServicePointsWon = sum(`Total Service Points Won`),#
+			ServicePoints = sum(`Total Service Points`),#
+			ReturnPointsWon = sum(`Total Return Points Won`),#
+			ReturnPoints = sum(`Total Return Points`)#
+		)#
+	output$ProbReturn <- output$ReturnPointsWon / output$ReturnPoints#
+	output$ProbServe <- output$ServicePointsWon / output$ServicePoints#
+	output#
+	})#
+#
+})
+OverallStats[[1]][[1]]
+OverallStats[[1]][[2]]
+combined <- combined[!is.na(combined$Player),]
+names(OverallStats)
+names(OverallStats[[1]])
+?lapply
+library(plyr)#
+library(lubridate)#
+#
+load(file = "~/Project/tennis/validation/data/atp_matchfacts_2013-2014.RData")#
+#
+combined$Date <- dmy(combined$Date)#
+combined <- combined[!is.na(combined$Player),]#
+#
+start <- mdy("1-1-2013") + weeks(1:52)#
+stop <- start + weeks(52)#
+OverallStats <- lapply(players, function(y){#
+	data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & data$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)#
+	results <- lapply(matches, function(x){#
+		index <- seq(1, nrow(x), by = 2)#
+		x[, "Total Return Points Won"] <- as.numeric(x[, "Total Return Points Won"])#
+		x[, "Total Return Points"] <- as.numeric(x[, "Total Return Points"])#
+		x[, "Total Service Points Won"] <- as.numeric(x[, "Total Service Points Won"])#
+		x[, "Total Service Points"] <- as.numeric(x[, "Total Service Points"])#
+		output <- ddply(x[index,], c("Player"), summarize,#
+			ServicePointsWon = sum(`Total Service Points Won`),#
+			ServicePoints = sum(`Total Service Points`),#
+			ReturnPointsWon = sum(`Total Return Points Won`),#
+			ReturnPoints = sum(`Total Return Points`)#
+		)#
+	output$ProbReturn <- output$ReturnPointsWon / output$ReturnPoints#
+	output$ProbServe <- output$ServicePointsWon / output$ServicePoints#
+	output#
+	})#
+#
+	names(results) <- stop#
+#
+results#
+})#
+#
+names(OverallStats) <- players#
+#
+save(OverallStats, file = "~/Project/tennis/validation/data/atp_newton_keller_rolling.RData")
+OverallStats <- lapply(players, function(y){#
+	data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & data$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)#
+	results <- lapply(matches, function(x){#
+		x[, "Total Return Points Won"] <- as.numeric(x[, "Total Return Points Won"])#
+		x[, "Total Return Points"] <- as.numeric(x[, "Total Return Points"])#
+		x[, "Total Service Points Won"] <- as.numeric(x[, "Total Service Points Won"])#
+		x[, "Total Service Points"] <- as.numeric(x[, "Total Service Points"])#
+		output <- ddply(x[index,], c("Player"), summarize,#
+			ServicePointsWon = sum(`Total Service Points Won`),#
+			ServicePoints = sum(`Total Service Points`),#
+			ReturnPointsWon = sum(`Total Return Points Won`),#
+			ReturnPoints = sum(`Total Return Points`)#
+		)#
+	output$ProbReturn <- output$ReturnPointsWon / output$ReturnPoints#
+	output$ProbServe <- output$ServicePointsWon / output$ServicePoints#
+	output#
+	})#
+#
+	names(results) <- stop#
+#
+results#
+})#
+#
+names(OverallStats) <- players
+OverallStats <- lapply(players, function(y){#
+	data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & data$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)#
+	results <- lapply(matches, function(x){#
+		x[, "Total Return Points Won"] <- as.numeric(x[, "Total Return Points Won"])#
+		x[, "Total Return Points"] <- as.numeric(x[, "Total Return Points"])#
+		x[, "Total Service Points Won"] <- as.numeric(x[, "Total Service Points Won"])#
+		x[, "Total Service Points"] <- as.numeric(x[, "Total Service Points"])#
+		output <- ddply(x, c("Player"), summarize,#
+			ServicePointsWon = sum(`Total Service Points Won`),#
+			ServicePoints = sum(`Total Service Points`),#
+			ReturnPointsWon = sum(`Total Return Points Won`),#
+			ReturnPoints = sum(`Total Return Points`)#
+		)#
+	output$ProbReturn <- output$ReturnPointsWon / output$ReturnPoints#
+	output$ProbServe <- output$ServicePointsWon / output$ServicePoints#
+	output#
+	})#
+#
+	names(results) <- stop#
+#
+results#
+})#
+#
+names(OverallStats) <- players
+names(OverallStats[[1]])
+OverallStats[[1]][[1]]
+OverallStats[[1]][[2]]
+names(players)
+head(players)
+y
+data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & data$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)
+head(matches)
+head(data)
+library(plyr)#
+library(lubridate)#
+#
+load(file = "~/Project/tennis/validation/data/atp_matchfacts_2013-2014.RData")#
+#
+combined$Date <- dmy(combined$Date)
+load(file = "~/Project/tennis/validation/data/atp_matchfacts_2013-2014.RData")
+head(combined$Date)
+library(plyr)#
+library(lubridate)#
+#
+load(file = "~/Project/tennis/validation/data/atp_matchfacts_2013-2014.RData")#
+#
+combined <- combined[!is.na(combined$Player),]#
+#
+start <- mdy("1-1-2013") + weeks(1:52)#
+stop <- start + weeks(52)#
+OverallStats <- lapply(players, function(y){#
+	data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & data$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)#
+	results <- lapply(matches, function(x){#
+		x[, "Total Return Points Won"] <- as.numeric(x[, "Total Return Points Won"])#
+		x[, "Total Return Points"] <- as.numeric(x[, "Total Return Points"])#
+		x[, "Total Service Points Won"] <- as.numeric(x[, "Total Service Points Won"])#
+		x[, "Total Service Points"] <- as.numeric(x[, "Total Service Points"])#
+		output <- ddply(x, c("Player"), summarize,#
+			ServicePointsWon = sum(`Total Service Points Won`),#
+			ServicePoints = sum(`Total Service Points`),#
+			ReturnPointsWon = sum(`Total Return Points Won`),#
+			ReturnPoints = sum(`Total Return Points`)#
+		)#
+	output$ProbReturn <- output$ReturnPointsWon / output$ReturnPoints#
+	output$ProbServe <- output$ServicePointsWon / output$ServicePoints#
+	output#
+	})#
+#
+	names(results) <- stop#
+#
+results#
+})#
+#
+names(OverallStats) <- players#
+#
+save(OverallStats, file = "~/Project/tennis/validation/data/atp_newton_keller_rolling.RData")
+OverallStats[[1]][[1]]
+OverallStats[[1]][[2]]
+OverallStats <- lapply(players, function(y){#
+	data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & data$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)#
+	results <- lapply(matches, function(x){#
+		x[, "Total Return Points Won"] <- as.numeric(x[, "Total Return Points Won"])#
+		x[, "Total Return Points"] <- as.numeric(x[, "Total Return Points"])#
+		x[, "Total Service Points Won"] <- as.numeric(x[, "Total Service Points Won"])#
+		x[, "Total Service Points"] <- as.numeric(x[, "Total Service Points"])#
+		output <- data.frame(#
+			ServicePointsWon = sum(x[, "Total Return Points Won"]),#
+			ServicePoints = sum(x[, "Total Return Points"] ),#
+			ReturnPointsWon = sum(x[, "Total Return Points"]),#
+			ReturnPoints = sum(x[, "Total Return Points"])#
+		)#
+	output$ProbReturn <- output$ReturnPointsWon / output$ReturnPoints#
+	output$ProbServe <- output$ServicePointsWon / output$ServicePoints#
+	output#
+	})#
+#
+	names(results) <- stop#
+#
+results#
+})#
+#
+names(OverallStats) <- players
+OverallStats[[1]][[1]]
+OverallStats[[1]][[2]]
+OverallStats <- lapply(players[1:2], function(y){#
+	data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & data$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)#
+	results <- lapply(matches, function(x){#
+		x[, "Total Return Points Won"] <- as.numeric(x[, "Total Return Points Won"])#
+		x[, "Total Return Points"] <- as.numeric(x[, "Total Return Points"])#
+		x[, "Total Service Points Won"] <- as.numeric(x[, "Total Service Points Won"])#
+		x[, "Total Service Points"] <- as.numeric(x[, "Total Service Points"])#
+		output <- data.frame(#
+		    Player = x$Player[1],#
+			ServicePointsWon = sum(x[, "Total Return Points Won"], na.rm = TRUE),#
+			ServicePoints = sum(x[, "Total Return Points"] , na.rm = TRUE),#
+			ReturnPointsWon = sum(x[, "Total Return Points"], na.rm = TRUE),#
+			ReturnPoints = sum(x[, "Total Return Points"], na.rm = TRUE)#
+		)#
+	output$ProbReturn <- output$ReturnPointsWon / output$ReturnPoints#
+	output$ProbServe <- output$ServicePointsWon / output$ServicePoints#
+	output#
+	})#
+#
+	names(results) <- stop#
+#
+results#
+})
+OverallStats[[1]][[1]]
+OverallStats <- lapply(players, function(y){#
+	data <- subset(combined, PlayerKey == y)#
+	matches <- mapply(function(begin, end){#
+		data[data$Date >= begin & data$Date < end, ]#
+	}, begin = start, end = stop, SIMPLIFY = FALSE)#
+	results <- lapply(matches, function(x){#
+		x[, "Total Return Points Won"] <- as.numeric(x[, "Total Return Points Won"])#
+		x[, "Total Return Points"] <- as.numeric(x[, "Total Return Points"])#
+		x[, "Total Service Points Won"] <- as.numeric(x[, "Total Service Points Won"])#
+		x[, "Total Service Points"] <- as.numeric(x[, "Total Service Points"])#
+		output <- data.frame(#
+		    Player = x$Player[1],#
+			ServicePointsWon = sum(x[, "Total Service Points Won"], na.rm = TRUE),#
+			ServicePoints = sum(x[, "Total Service Points"] , na.rm = TRUE),#
+			ReturnPointsWon = sum(x[, "Total Return Points Won"], na.rm = TRUE),#
+			ReturnPoints = sum(x[, "Total Return Points"], na.rm = TRUE)#
+		)#
+	output$ProbReturn <- output$ReturnPointsWon / output$ReturnPoints#
+	output$ProbServe <- output$ServicePointsWon / output$ServicePoints#
+	output#
+	})#
+#
+	names(results) <- stop#
+#
+results#
+})#
+#
+names(OverallStats) <- players
+OverallStats[[1]][[1]]
+save(OverallStats, file = "~/Project/tennis/validation/data/atp_newton_keller_rolling.RData")
+library(lubridate)#
+#
+# Boulier and Stekler#
+load(file = "~/Project/tennis/validation/code/bs_models.RData")#
+#
+Dates <- ymd(names(bs_models))#
+atp_seeded <- subset(atp_seeded, TestSet == 1)#
+atp_unseeded <- subset(atp_unseeded, TestSet == 1)#
+#
+atp_seeded$Model <- sapply(atp_seeded$Date, function(x) max(which(Dates <= x)))#
+atp_seeded$Model[!is.finite(atp_seeded$Model)] <- 1#
+#
+atp_seeded <- atp_seeded[order(atp_seeded$Model),]#
+#
+atp_seeded_w <- subset(atp_seeded, Tournament == "Wimbledon")#
+atp_seeded <- subset(atp_seeded, Tournament != "Wimbledon")#
+#
+atp_seeded_split <- split(atp_seeded, f = atp_seeded$Model)#
+#
+bs_predictions <- lapply(names(atp_seeded_split), function(x){#
+	predict(bs_models[[as.numeric(x)]]$not_wimbledon, newdata = atp_seeded_split[[x]], type = "response")#
+})#
+#
+atp_seeded$bs_prediction <- unlist(bs_predictions)#
+#
+atp_seeded_split <- split(atp_seeded_w, f = atp_seeded_w$Model)#
+#
+bs_predictions_w <- lapply(names(atp_seeded_split), function(x){#
+	predict(bs_models[[as.numeric(x)]]$wimbledon, newdata = atp_seeded_split[[x]], type = "response")#
+})#
+#
+atp_seeded_w$bs_prediction <- unlist(bs_predictions_w)#
+atp_unseeded$bs_prediction <- 0.5 # Unseeded#
+#
+merge_variables <- c("Outcome", "Tournament", "Location", "Series","Date", "WRank", "LRank", "Winner", "Loser", "Surface", "Best.of")#
+keep <- c(merge_variables, "bs_prediction")#
+prediction_data <- rbind(atp_seeded[,keep], atp_seeded_w[,keep], atp_unseeded[,keep])
+library(lubridate)#
+load(file = "~/Project/tennis/validation/data/atp_newton_keller_rolling.RData")#
+source(file = "~/Project/tennis/validation/code/markov_matchwin.R")#
+#
+match_prediction <- function(player1, player2, date, bestof){#
+	player1 <- OverallStats[[player1]]#
+	player2 <- OverallStats[[player2]]#
+	dates <- dmy(names(player1))#
+	date_index <- max(which(dates < date))#
+match_win(player1[[date_index]]$ProbServe, player2[[date_index]]$ProbServe, bestof)#
+}#
+#
+newton_prediction <- mapply(match_prediction, #
+	player1 = prediction_data$Winner, #
+	player2 = prediction_data$Loser, #
+	date = prediction_data$Date,#
+	bestof = prediction_data$Best.of == 3)
+player1 = prediction_data$Winner[1]; #
+	player2 = prediction_data$Loser[1];#
+	date = prediction_data$Date[1]
+player1
+player2
+date
+player1 <- OverallStats[[player1]]#
+	player2 <- OverallStats[[player2]]
+player1[[1]]
+head(combined)
+dates <- dmy(names(player1))
+names(player1)[1:5]
+dates <- ymd(names(player1))#
+	date_index <- max(which(dates < date))
+date
+head(dates)
+any(is.na(dates))
+date
+date_index <- max(which(dates < date))
+dates
+dates < date
+date
+date_index <- which(dates < date)#
+	date_index <- ifelse(length(date_index) == 0, 1, max(date_index))
+date_index
+match_prediction <- function(player1, player2, date, bestof){#
+	player1 <- OverallStats[[player1]]#
+	player2 <- OverallStats[[player2]]#
+	dates <- ymd(names(player1))#
+	date_index <- which(dates < date)#
+	date_index <- ifelse(length(date_index) == 0, 1, max(date_index))#
+match_win(player1[[date_index]]$ProbServe, player2[[date_index]]$ProbServe, bestof)#
+}#
+#
+newton_prediction <- mapply(match_prediction, #
+	player1 = prediction_data$Winner, #
+	player2 = prediction_data$Loser, #
+	date = prediction_data$Date,#
+	bestof = prediction_data$Best.of == 3)
+match_prediction <- function(player1, player2, date, bestof){#
+	print(player1)#
+	print(player2)#
+	player1 <- OverallStats[[player1]]#
+	player2 <- OverallStats[[player2]]#
+	dates <- ymd(names(player1))#
+	date_index <- which(dates < date)#
+	date_index <- ifelse(length(date_index) == 0, 1, max(date_index))#
+match_win(player1[[date_index]]$ProbServe, player2[[date_index]]$ProbServe, bestof)#
+}#
+#
+newton_prediction <- mapply(match_prediction, #
+	player1 = prediction_data$Winner, #
+	player2 = prediction_data$Loser, #
+	date = prediction_data$Date,#
+	bestof = prediction_data$Best.of == 3)#
+prediction_data$newton_prediction_rolling <- newton_prediction
+any(names(OverallStats) == "Ouyang B.")
+match_prediction <- function(player1, player2, date, bestof){#
+#
+	if(!(player1 %in% names(OverallStats)) | !(player2 %in% names(OverallStats))){#
+		return(NA)#
+	}#
+	else{#
+	player1 <- OverallStats[[player1]]#
+	player2 <- OverallStats[[player2]]#
+	dates <- ymd(names(player1))#
+	date_index <- which(dates < date)#
+	date_index <- ifelse(length(date_index) == 0, 1, max(date_index))#
+match_win(player1[[date_index]]$ProbServe, player2[[date_index]]$ProbServe, bestof)#
+ }#
+}#
+#
+newton_prediction <- mapply(match_prediction, #
+	player1 = prediction_data$Winner, #
+	player2 = prediction_data$Loser, #
+	date = prediction_data$Date,#
+	bestof = prediction_data$Best.of == 3)#
+prediction_data$newton_prediction_rolling <- newton_prediction
+head(prediction_data)
+summary(prediction_data$newton_prediction_rolling)
+library(lubridate)#
+#
+# Boulier and Stekler#
+load(file = "~/Project/tennis/validation/code/bs_models.RData")#
+#
+Dates <- ymd(names(bs_models))#
+atp_seeded <- subset(atp_seeded, TestSet == 1)#
+atp_unseeded <- subset(atp_unseeded, TestSet == 1)#
+#
+atp_seeded$Model <- sapply(atp_seeded$Date, function(x) max(which(Dates <= x)))#
+atp_seeded$Model[!is.finite(atp_seeded$Model)] <- 1#
+#
+atp_seeded <- atp_seeded[order(atp_seeded$Model),]#
+#
+atp_seeded_w <- subset(atp_seeded, Tournament == "Wimbledon")#
+atp_seeded <- subset(atp_seeded, Tournament != "Wimbledon")#
+#
+atp_seeded_split <- split(atp_seeded, f = atp_seeded$Model)#
+#
+bs_predictions <- lapply(names(atp_seeded_split), function(x){#
+	predict(bs_models[[as.numeric(x)]]$not_wimbledon, newdata = atp_seeded_split[[x]], type = "response")#
+})#
+#
+atp_seeded$bs_prediction <- unlist(bs_predictions)#
+#
+atp_seeded_split <- split(atp_seeded_w, f = atp_seeded_w$Model)#
+#
+bs_predictions_w <- lapply(names(atp_seeded_split), function(x){#
+	predict(bs_models[[as.numeric(x)]]$wimbledon, newdata = atp_seeded_split[[x]], type = "response")#
+})#
+#
+atp_seeded_w$bs_prediction <- unlist(bs_predictions_w)#
+atp_unseeded$bs_prediction <- 0.5 # Unseeded#
+#
+merge_variables <- c("Outcome", "Tournament", "Location", "Series","Date", "WRank", "LRank", "Winner", "Loser", "Surface", "Best.of")#
+keep <- c(merge_variables, "bs_prediction")#
+prediction_data <- rbind(atp_seeded[,keep], atp_seeded_w[,keep], atp_unseeded[,keep])#
+# Corrall model#
+load(file = "~/Project/tennis/validation/code/corrall_models.RData")#
+#
+Dates <- ymd(names(corral_models))#
+atp_train <- subset(atp_train, TestSet == 1)#
+#
+atp_train$Model <- sapply(atp_train$Date, function(x) max(which(Dates <= x)))#
+atp_train$Model[!is.finite(atp_train$Model)] <- 1#
+atp_train <- atp_train[order(atp_train$Model),]#
+atp_train_split <- split(atp_train, f = atp_train$Model)#
+#
+corral_predictions <- lapply(names(atp_train_split), function(x){#
+	predict(corral_models[[as.numeric(x)]], newdata = atp_train_split[[x]], type = "response")#
+})#
+#
+atp_train$corral_prediction <- unlist(corral_predictions)#
+#
+prediction_data <- merge(prediction_data, atp_train[,c(merge_variables, "corral_prediction")], by = merge_variables, all.x = TRUE)#
+# Gilsdorf#
+load(file = "~/Project/tennis/validation/data/atp_prizes.RData")#
+load(file = "~/Project/tennis/validation/code/gilsdorf_models.RData")#
+#
+Dates <- ymd(names(gilsdorf_models))#
+atp_train <- subset(atp_train, TestSet == 1)#
+#
+atp_train$Model <- sapply(atp_train$Date, function(x) max(which(Dates <= x)))#
+atp_train$Model[!is.finite(atp_train$Model)] <- 1#
+atp_train <- atp_train[order(atp_train$Model),]#
+atp_train_split <- split(atp_train, f = atp_train$Model)#
+#
+gilsdorf_predictions <- lapply(names(atp_train_split), function(x){#
+	predict(gilsdorf_models[[as.numeric(x)]], newdata = atp_train_split[[x]], type = "response")#
+})#
+#
+atp_train$gilsdorf_prediction <- unlist(gilsdorf_predictions)#
+#
+prediction_data <- merge(prediction_data, atp_train[,c(merge_variables, "gilsdorf_prediction")], by = merge_variables, all.x = TRUE)#
+# Klaassen#
+load(file = "~/Project/tennis/validation/data/atp_klaassen.RData")#
+load(file = "~/Project/tennis/validation/code/klaassen_models.RData")#
+#
+Dates <- ymd(names(klaassen_models))#
+atp_train <- subset(atp_train, TestSet == 1)#
+#
+atp_train$Model <- sapply(atp_train$Date, function(x) max(which(Dates <= x)))#
+atp_train$Model[!is.finite(atp_train$Model)] <- 1#
+atp_train <- atp_train[order(atp_train$Model),]#
+atp_train_split <- split(atp_train, f = atp_train$Model)#
+#
+klaassen_predictions <- lapply(names(atp_train_split), function(x){#
+	predict(klaassen_models[[as.numeric(x)]], newdata = atp_train_split[[x]], type = "response")#
+})#
+#
+atp_train$klaassen_prediction <- unlist(klaassen_predictions)#
+#
+prediction_data <- merge(prediction_data, atp_train[,c(merge_variables, "klaassen_prediction")], by = merge_variables, all.x = TRUE)#
+# McHale #
+load(file = "~/Project/tennis/validation/data/atp_mchale.RData")#
+abilities <- mchale$par#
+#
+mchale_prediction <- function(x, y){#
+	if(x %in% names(abilities))#
+		a1 <- abilities[x]#
+	else#
+		a1 <- 1	#
+#
+	if(y %in% names(abilities))#
+		a2 <- abilities[y]#
+	else#
+		a2 <- 1			#
+#
+a1 / (a1 + a2)#
+}#
+#
+prediction_data$mchale_prediction <- mapply(mchale_prediction, x = prediction_data$Winner, y = prediction_data$Loser)#
+# Leitner#
+load(file = "~/Project/tennis/validation/data/atp_bcm.RData")#
+prediction_data <- merge(prediction_data, atp_train[,c(merge_variables, "bcm_prediction")], by = merge_variables, all.x = TRUE)#
+# Newton-Keller#
+load(file = "~/Project/tennis/validation/data/atp_newton_keller.RData")#
+source(file = "~/Project/tennis/validation/code/markov_matchwin.R")#
+#
+match_prediction <- function(player1, player2, bestof){#
+	player1 <- gsub("\\.|-"," ",player1)#
+	player2 <- gsub("\\.|-"," ",player2)#
+	player1 <- strsplit(player1, " ")[[1]]#
+	player2 <- strsplit(player2, " ")[[1]]#
+	player1_hits <- lapply(player1, function(x) grep(x, OverallStats$Player))#
+	player1_match <- sort(table(unlist(player1_hits)), decreasing = TRUE)[1]#
+	player1_match <- as.numeric(names(player1_match))#
+#
+	player2_hits <- lapply(player2, function(x) grep(x, OverallStats$Player))#
+	player2_match <- sort(table(unlist(player2_hits)), decreasing = TRUE)[1]#
+	player2_match <- as.numeric(names(player2_match))#
+match_win(OverallStats$ProbServe[player1_match], OverallStats$ProbReturn[player2_match], bestof)#
+}#
+#
+newton_prediction <- mapply(match_prediction, #
+	player1 = prediction_data$Winner, #
+	player2 = prediction_data$Loser, #
+	bestof = prediction_data$Best.of == 3)#
+prediction_data$newton_prediction <- newton_prediction#
+#
+# Barnett & Clarke#
+load(file = "~/Project/tennis/validation/data/atp_barnett_clarke.RData")#
+#
+player_avg_serve_prob <- sum(TournamentStats$ProbServe * TournamentStats$ServicePoints, na.rm = TRUE) / sum(TournamentStats$ServicePoints, na.rm = TRUE)#
+#
+player_avg_return_prob <- sum(TournamentStats$ProbReturn * TournamentStats$ReturnPoints, na.rm = TRUE) / sum(TournamentStats$ReturnPoints, na.rm = TRUE)#
+#
+match_prediction <- function(player1, player2, surface, bestof){#
+	Obj <- TournamentStats[TournamentStats$Surface == surface,]#
+	player1 <- gsub("\\.|-"," ",player1)#
+	player2 <- gsub("\\.|-"," ",player2)#
+	player1 <- strsplit(player1, " ")[[1]]#
+	player2 <- strsplit(player2, " ")[[1]]#
+	player1_hits <- lapply(player1, function(x) grep(x, Obj$Player))#
+	player1_match <- sort(table(unlist(player1_hits)), decreasing = TRUE)[1]#
+	player1_match <- as.numeric(names(player1_match))#
+#
+	player2_hits <- lapply(player2, function(x) grep(x, Obj$Player))#
+	player2_match <- sort(table(unlist(player2_hits)), decreasing = TRUE)[1]#
+	player2_match <- as.numeric(names(player2_match))#
+	serve_tournament <- Obj$ProbServe[player1_match]+ (Obj$AvgProbServe[player1_match] - player_avg_serve_prob) -#
+		(Obj$ProbReturn[player2_match] - player_avg_return_prob)#
+#
+	return_tournament <- Obj$ProbReturn[player2_match] - (Obj$AvgProbServe[player1_match] - player_avg_serve_prob) +#
+		(Obj$ProbReturn[player2_match] - player_avg_return_prob)#
+match_win(serve_tournament, return_tournament, bestof)#
+}#
+#
+barnett_prediction <- mapply(match_prediction, #
+	player1 = prediction_data$Winner, #
+	player2 = prediction_data$Loser, #
+	surface = prediction_data$Surface,#
+	bestof = prediction_data$Best.of == 3)#
+#
+prediction_data$barnett_prediction <- barnett_prediction#
+# Spanias#
+#
+load(file = "~/Project/tennis/validation/data/atp_spanias.RData")#
+#
+Averages <- colSums(OverallStats$ServicePoints * OverallStats[,-(1:2)]) / sum(OverallStats$ServicePoints)#
+#
+match_prediction <- function(player1, player2, bestof){#
+	player1 <- gsub("\\.|-"," ",player1)#
+	player2 <- gsub("\\.|-"," ",player2)#
+	player1 <- strsplit(player1, " ")[[1]]#
+	player2 <- strsplit(player2, " ")[[1]]#
+	player1_hits <- lapply(player1, function(x) grep(x, OverallStats$Player))#
+	player1_match <- sort(table(unlist(player1_hits)), decreasing = TRUE)[1]#
+	player1_match <- as.numeric(names(player1_match))#
+#
+	player2_hits <- lapply(player2, function(x) grep(x, OverallStats$Player))#
+	player2_match <- sort(table(unlist(player2_hits)), decreasing = TRUE)[1]#
+	player2_match <- as.numeric(names(player2_match))#
+	# a_c <- OverallStats$a[player1_match] + OverallStats$a[player2_match] - Averages["a"]#
+	# b_c <- OverallStats$b[player1_match] + OverallStats$b[player2_match] - Averages["b"]#
+	# c_c <- 1 + OverallStats$c[player1_match] - OverallStats$c[player2_match] - Averages["c"]#
+	# d_c <- OverallStats$d[player1_match] + OverallStats$d[player2_match] - Averages["d"]#
+	# e_c <- 1 + OverallStats$e[player1_match] - OverallStats$e[player2_match] - Averages["e"]#
+	a_c <- OverallStats$a[player1_match] #
+	b_c <- OverallStats$b[player1_match] #
+	c_c <- OverallStats$c[player1_match] #
+	d_c <- OverallStats$d[player1_match] #
+	e_c <- OverallStats$e[player1_match] #
+	prob_serve <- a_c + (b_c * c_c - a_c) + (1 - b_c) * (1 - d_c) * e_c#
+            prob_return <- OverallStats$ProbReturn[player2_match]#
+ match_win(  prob_serve, prob_return, bestof)#
+}#
+#
+spanias_prediction <- mapply(match_prediction, #
+	player1 = prediction_data$Winner, #
+	player2 = prediction_data$Loser, #
+	bestof = prediction_data$Best.of == 3)#
+#
+prediction_data$spanias_prediction <- spanias_prediction#
+#
+# Knottenbelt#
+load(file = "~/Project/tennis/validation/data/stats_knottenbelt.RData")#
+#
+PlayerNames <- as.character(unique(player_pairings$player1))#
+#
+match_prediction <- function(player1, player2, bestof){#
+	player1 <- gsub("\\.|-"," ",player1)#
+	player2 <- gsub("\\.|-"," ",player2)#
+	player1 <- strsplit(player1, " ")[[1]]#
+	player2 <- strsplit(player2, " ")[[1]]#
+	player1_hits <- lapply(player1, function(x) grep(x, PlayerNames))#
+	player1_match <- sort(table(unlist(player1_hits)), decreasing = TRUE)[1]#
+	player1_match <- as.numeric(names(player1_match))#
+	player1_name <- PlayerNames[player1_match]#
+	player2_hits <- lapply(player2, function(x) grep(x, PlayerNames))#
+	player2_match <- sort(table(unlist(player2_hits)), decreasing = TRUE)[1]#
+	player2_match <- as.numeric(names(player2_match))#
+	player2_name <- PlayerNames[player2_match]#
+	index <- which(player_pairings$player1 == player1_name & player_pairings$player2 == player2_name)#
+	if(length(index) == 0){#
+		0.5#
+	}#
+	else{#
+    	if(nrow(CommonStats[[index]]) == 0){#
+	   		n <- sapply(CommonStats, nrow)#
+			player1_index <- which(player_pairings$player1 == player1_name & n > 0)#
+			player2_index <- which(player_pairings$player1 == player2_name & n > 0)#
+			prob_serve <- mean(sapply(CommonStats[player1_index], function(x) x$ProbServe[1]))#
+			prob_return <- mean(sapply(CommonStats[player2_index], function(x) x$ProbReturn[1]))#
+		}#
+	else{#
+    	prob_serve <- CommonStats[[index]]$ProbServe[1]#
+   	 prob_return <- CommonStats[[index]]$ProbReturn[2]           #
+    	}#
+    	 match_win(  prob_serve, prob_return, bestof)#
+  }#
+}#
+#
+knottenbelt_prediction <- mapply(match_prediction, #
+	player1 = prediction_data$Winner, #
+	player2 = prediction_data$Loser, #
+	bestof = prediction_data$Best.of == 3)#
+#
+prediction_data$knottenbelt_prediction <- knottenbelt_prediction#
+#
+save(prediction_data, file = "~/Project/tennis/validation/data/prediction_data.RData")#
+## Newton-Keller with updated stats#
+#
+# Newton-Keller#
+library(lubridate)#
+load(file = "~/Project/tennis/validation/data/atp_newton_keller_rolling.RData")#
+source(file = "~/Project/tennis/validation/code/markov_matchwin.R")#
+#
+match_prediction <- function(player1, player2, date, bestof){#
+#
+	if(!(player1 %in% names(OverallStats)) | !(player2 %in% names(OverallStats))){#
+		return(NA)#
+	}#
+	else{#
+	player1 <- OverallStats[[player1]]#
+	player2 <- OverallStats[[player2]]#
+	dates <- ymd(names(player1))#
+	date_index <- which(dates < date)#
+	date_index <- ifelse(length(date_index) == 0, 1, max(date_index))#
+match_win(player1[[date_index]]$ProbServe, player2[[date_index]]$ProbReturn, bestof)#
+ }#
+}#
+#
+newton_prediction <- mapply(match_prediction, #
+	player1 = prediction_data$Winner, #
+	player2 = prediction_data$Loser, #
+	date = prediction_data$Date,#
+	bestof = prediction_data$Best.of == 3)#
+prediction_data$newton_prediction_rolling <- newton_prediction
+head(prediction_data)
+save(prediction_data, file = "~/Project/tennis/validation/data/prediction_data.RData")
+E2O <- function (E, O) #
+{#
+    lower = E/O * exp(-1.96 * sqrt(1/O))#
+    upper = E/O * exp(+1.96 * sqrt(1/O))#
+#
+data.frame(EO=E/O,lower=lower,upper=upper)#
+}#
+#
+predictions <- grep("prediction", names(prediction_data))
+prediction_data$Top30 <- ifelse(prediction_data$WRank <= 30 | prediction_data$LRank <= 30, 1, 0)#
+prediction_data$GrandSlam <- ifelse(prediction_data$Tournament %in% #
+	c("Wimbledon", "US Open", "Australian Open", "French Open"), 1, 0)#
+#
+# Description of Validation Data#
+Validation_Data <- c(#
+	N = nrow(prediction_data),#
+	Wins = sum(prediction_data$Outcome),#
+	table(prediction_data$Series),#
+	table(prediction_data$Surface),#
+	table(prediction_data$Top30)#
+)#
+#
+Validation_Data <- cbind(Validation_Data, round(Validation_Data / Validation_Data[1] * 100, 1))
+Validation_Data
+Calibration <- function(obj){#
+	PredictedWins <- do.call("rbind", lapply(obj[,predictions], function(x){#
+		data.frame(#
+			Wins = sum(obj$Outcome[!is.na(x)]),#
+			Predictions = sum(x, na.rm = TRUE)#
+		)#
+	}))#
+#
+	EO_ratios <- do.call("rbind", mapply(E2O, #
+		E = PredictedWins$Predictions, #
+		O = PredictedWins$Wins, SIMPLIFY = FALSE))#
+cbind(PredictedWins, EO_ratios)#
+}#
+#
+Overall <- Calibration(prediction_data)
+Overall
+AUCs <- function(outcome, pred){#
+	roc_obj <- roc(outcome, pred)#
+	ci_result <- as.numeric(ci.auc(roc_obj))#
+	data.frame(#
+		auc = ci_result[2],#
+		lower = ci_result[1],#
+		upper = ci_result[3]#
+	)#
+}#
+#
+discrimination <- do.call("rbind", mapply(AUCs, #
+	pred = prediction_data[,predictions],#
+	MoreArgs = list(outcome = prediction_data$Outcome),#
+	SIMPLIFY = FALSE)#
+)
+# Model performance #
+library(pROC)#
+library(xtable)
+AUCs <- function(outcome, pred){#
+	roc_obj <- roc(outcome, pred)#
+	ci_result <- as.numeric(ci.auc(roc_obj))#
+	data.frame(#
+		auc = ci_result[2],#
+		lower = ci_result[1],#
+		upper = ci_result[3]#
+	)#
+}#
+#
+discrimination <- do.call("rbind", mapply(AUCs, #
+	pred = prediction_data[,predictions],#
+	MoreArgs = list(outcome = prediction_data$Outcome),#
+	SIMPLIFY = FALSE)#
+)
+discrimination
+library(deuce)#
+#
+RN <- lapply(2004:2015, function(y) fetch_matchfacts("Rafael Nadal", y))
+Overall_BP <- do.call("rbind", lapply(RN, function(obj){#
+	data.frame(#
+	 Rafa = as.numeric(obj[seq(1, nrow(RN), by = 2), "Break Points Converted"]),#
+	 Opponent = as.numeric(obj[seq(2, nrow(RN), by = 2), "Break Points Converted"])#
+)}))#
+Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay")#
+	data.frame(#
+	 Rafa = as.numeric(obj[seq(1, nrow(RN), by = 2), "Break Points Converted"]),#
+	 Opponent = as.numeric(obj[seq(2, nrow(RN), by = 2), "Break Points Converted"])#
+)}))#
+Warmup_Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros")#
+	data.frame(#
+	 Rafa = as.numeric(obj[seq(1, nrow(RN), by = 2), "Break Points Converted"]),#
+	 Opponent = as.numeric(obj[seq(2, nrow(RN), by = 2), "Break Points Converted"])#
+)}))
+Overall_BP <- do.call("rbind", lapply(RN, function(obj){#
+	data.frame(#
+	 Rafa = as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"]),#
+	 Opponent = as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"])#
+)}))#
+Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay")#
+	data.frame(#
+	 Rafa = as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"]),#
+	 Opponent = as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"])#
+)}))#
+Warmup_Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros")#
+	data.frame(#
+	 Rafa = as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"]),#
+	 Opponent = as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"])#
+)}))
+Overall_BP
+Overall_BP <- do.call("rbind", lapply(RN, function(obj){#
+	data.frame(#
+	 Rafa = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay")#
+	data.frame(#
+	 Rafa = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+Warmup_Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros")#
+	data.frame(#
+	 Rafa = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))
+Overall_BP
+Overall_BP$Win <- Overall_BP$Rafa / (Overall_BP$Rafa + Overall_BP$Opponent)#
+#
+Clay_BP$Win <- Clay_BP$Rafa / (Clay_BP$Rafa + Clay_BP$Opponent)#
+#
+Warmup_Clay_BP$Win <- Warmup_Clay_BP$Rafa / (Warmup_Clay_BP$Rafa + Warmup_Clay_BP$Opponent)
+Overall_BP
+Clay_BP
+Warmup_Clay_BP
+names(RN[[1]])
+Wins <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros" & Player == "Rafael Nadal")#
+	data.frame(#
+		Total = nrow(obj),#
+		Win = sum(Winner)#
+)}))
+Wins <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros" & Player == "Rafael Nadal")#
+	data.frame(#
+		Total = nrow(obj),#
+		Win = sum(obj$Winner)#
+)}))
+# Actual wins#
+Wins <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros" & Player == "Rafael Nadal")#
+	data.frame(#
+		Total = nrow(obj),#
+		Win = sum(as.numeric(obj$Winner))#
+)}))
+Wins
+Wins$Win /(Wins$Total)
+Temp <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament == "Roland Garros" & Player == "Rafael Nadal")#
+	data.frame(#
+		Total = nrow(obj),#
+		Win = sum(as.numeric(obj$Winner))#
+)}))
+Temp
+Warmup_Clay_BP$Year <- 2004:2015
+Warmup_Clay_BP
+Wins$Year <- 2004:2015
+Wins
+ND <- lapply(2004:2015, function(y) fetch_matchfacts("Novak Djokovic", y))#
+#
+Overall_BP <- do.call("rbind", lapply(RN, function(obj){#
+	data.frame(#
+	 Novak = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay")#
+	data.frame(#
+	 Novak = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+Warmup_Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros")#
+	data.frame(#
+	 Novak = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+Overall_BP$Win <- Overall_BP$Novak / (Overall_BP$Novak + Overall_BP$Opponent)#
+Clay_BP$Win <- Clay_BP$Novak / (Clay_BP$Novak + Clay_BP$Opponent)#
+Warmup_Clay_BP$Win <- Warmup_Clay_BP$Novak / (Warmup_Clay_BP$Novak + Warmup_Clay_BP$Opponent)#
+#
+# Actual wins#
+Wins <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros" & Player == "Novak Djokovic")#
+	data.frame(#
+		Total = nrow(obj),#
+		Win = sum(as.numeric(obj$Winner))#
+)}))
+ND_Overall_BP <- do.call("rbind", lapply(RN, function(obj){#
+	data.frame(#
+	 Novak = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+ND_Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay")#
+	data.frame(#
+	 Novak = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+ND_Warmup_Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros")#
+	data.frame(#
+	 Novak = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))
+ND_Overall_BP$Win <- ND_Overall_BP$Novak / (ND_Overall_BP$Novak + ND_Overall_BP$Opponent)#
+ND_Clay_BP$Win <- ND_Clay_BP$Novak / (ND_Clay_BP$Novak + ND_Clay_BP$Opponent)#
+ND_Warmup_Clay_BP$Win <- ND_Warmup_Clay_BP$Novak / (ND_Warmup_Clay_BP$Novak + ND_Warmup_Clay_BP$Opponent)
+# Actual wins#
+ND_Wins <- do.call("rbind", lapply(ND, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros" & Player == "Novak Djokovic")#
+	data.frame(#
+		Total = nrow(obj),#
+		Win = sum(as.numeric(obj$Winner))#
+)}))
+Overall_BP <- do.call("rbind", lapply(RN, function(obj){#
+	data.frame(#
+	 Rafa = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay")#
+	data.frame(#
+	 Rafa = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+Warmup_Clay_BP <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros")#
+	data.frame(#
+	 Rafa = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+Overall_BP$Win <- Overall_BP$Rafa / (Overall_BP$Rafa + Overall_BP$Opponent)#
+Clay_BP$Win <- Clay_BP$Rafa / (Clay_BP$Rafa + Clay_BP$Opponent)#
+Warmup_Clay_BP$Win <- Warmup_Clay_BP$Rafa / (Warmup_Clay_BP$Rafa + Warmup_Clay_BP$Opponent)#
+#
+# Actual wins#
+Wins <- do.call("rbind", lapply(RN, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros" & Player == "Rafael Nadal")#
+	data.frame(#
+		Total = nrow(obj),#
+		Win = sum(as.numeric(obj$Winner))#
+)}))
+Overall_BP$Strength <- with(Overall_BR, Rafa / Opponent)
+Overall_BP$Strength <- with(Overall_BP, Rafa / Opponent)
+Clay_BP$Strength <- with(Clay_BP, Rafa / Opponent)#
+Warmup_Clay_BP$Strength <- with(Warmup_Clay_BP, Rafa / Opponent)
+ND_Overall_BP$Strength <- with(ND_Overall_BP, Novak / Opponent)#
+ND_Clay_BP$Strength <- with(ND_Clay_BP, Novak / Opponent)#
+ND_Warmup_Clay_BP$Strength <- with(ND_Warmup_Clay_BP, Novak / Opponent)
+cbind(Overall_BP, ND_Overall_BO)
+cbind(Overall_BP, ND_Overall_BP)
+ND_Overall_BP <- do.call("rbind", lapply(ND, function(obj){#
+	data.frame(#
+	 Novak = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+ND_Clay_BP <- do.call("rbind", lapply(ND, function(obj){#
+	obj <- subset(obj, Surface == "Clay")#
+	data.frame(#
+	 Novak = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+ND_Warmup_Clay_BP <- do.call("rbind", lapply(ND, function(obj){#
+	obj <- subset(obj, Surface == "Clay" & Tournament != "Roland Garros")#
+	data.frame(#
+	 Novak = sum(as.numeric(obj[seq(1, nrow(obj), by = 2), "Break Points Converted"])),#
+	 Opponent = sum(as.numeric(obj[seq(2, nrow(obj), by = 2), "Break Points Converted"]))#
+)}))#
+ND_Overall_BP$Win <- ND_Overall_BP$Novak / (ND_Overall_BP$Novak + ND_Overall_BP$Opponent)#
+ND_Clay_BP$Win <- ND_Clay_BP$Novak / (ND_Clay_BP$Novak + ND_Clay_BP$Opponent)#
+ND_Warmup_Clay_BP$Win <- ND_Warmup_Clay_BP$Novak / (ND_Warmup_Clay_BP$Novak + ND_Warmup_Clay_BP$Opponent)
+ND_Overall_BP$Strength <- with(ND_Overall_BP, Novak / Opponent)#
+ND_Clay_BP$Strength <- with(ND_Clay_BP, Novak / Opponent)#
+ND_Warmup_Clay_BP$Strength <- with(ND_Warmup_Clay_BP, Novak / Opponent)
+cbind(Overall_BP, ND_Overall_BP)
+cbind(Clay_BP, ND_CLay_BP)
+cbind(Clay_BP, ND_Clay_BP)
+cbind(Warmup_Clay_BP, ND_Warmup_Clay_BP)
+p <- Warmup_Clay_BP$Strength / (ND_Warmup_Clay_BP$Strength + Warmup_Clay_BP$Strength)
+p
+p <- Warmup_Clay_BP$Win / (ND_Warmup_Clay_BP$Win + Warmup_Clay_BP$Win)
+p
+quit("no")
+library(RSelenium)#
+RSelenium::checkForServer(update=T)#
+RSelenium::startServer()#
+#
+get_stats <- function(matchid, set){#
+	BaseUrl <- "http://www.flashscore.com/match/MATCHID/#point-by-point;SET"#
+	BaseUrl <- sub("MATCHID", matchid, BaseUrl)#
+	BaseUrl <- sub("SET", set, BaseUrl)#
+	remDr <-remoteDriver()#
+	remDr$open(silent = TRUE)#
+	on.exit(remDr$close())#
+	remDr$navigate(BaseUrl)#
+#	remDr$setImplicitWaitTimeout(3000)#
+    webElem <- remDr$findElements(using = 'id', "detail")#
+	match_stat_string <- unlist(lapply(webElem, function(x){x$getElementText()}))#
+#
+	lines <- strsplit(match_stat_string, split = "\n")[[1]]#
+	game_lines <- which(grepl("15:0|0:15", lines) & !grepl("\\.",lines)) # Make sure date line isn't included#
+	lines[game_lines] <- gsub("(SP)|(BP)|(MP)", "", lines[game_lines])#
+	ranks <- sub("(WTA: +)([0-9]+)(.*)", "\\2", lines[grepl("WTA:", lines)])#
+	ranks <- as.numeric(ranks)#
+	match_result <- grep("[A-Z].*[0-9] ?- ?[0-9]", lines)[1]#
+	set_results <- grep("[0-9] ?- ?[0-9]", lines)#
+	set_results <- set_results[-1]	# Remove match outcome#
+	lines[set_results] <- gsub("(SP)|(BP)|(MP)", "", lines[set_results])#
+	lines[set_results] <- gsub(" ","", lines[set_results])#
+#
+	left_result <- as.numeric(sub("(.*)([0-9])( ?- ?)([0-9])(.*)","\\2",lines[match_result]))#
+	right_result <- as.numeric(sub("(.*)([0-9])( ?- ?)([0-9])(.*)","\\4",lines[match_result]))#
+	winner_position <- ifelse(left_result > right_result, 1, 2)#
+	loser_position <- ifelse(winner_position == 1, 2, 1)#
+	left_name <- sub("(.*)( [0-9]-[0-9] )(.*)","\\1", lines[match_result])#
+	right_name <- sub("(.*)( [0-9]-[0-9] )(.*)","\\3", lines[match_result])#
+	if(set == 3 & left_result + right_result < 3){#
+	output <- data.frame(#
+	 	Winner = c(1, 0)[c(winner_position, loser_position)],#
+		Players = c(left_name, right_name),#
+		Ranks = ranks,#
+		ServicePointsWon = c(0, 0),#
+		ReturnPointsWon = c(0, 0)#
+		)#
+	}#
+	else{#
+	if((lines[set_results][1] == "1-0" & !grepl("LOST SERVE", lines[set_results[1] + 1])) |#
+	   (lines[set_results][1] == "0-1" & grepl("LOST SERVE", lines[set_results[1] - 1]))#
+	)#
+		left.first.serve <- TRUE#
+	else#
+		left.first.serve <- FALSE#
+	split_lines <- strsplit(lines[game_lines], split = ",")#
+	split_lines <- lapply(split_lines, function(x){#
+		x <- gsub(" ","",x)#
+		t(sapply(x, function(y) strsplit(y, ":")[[1]]))#
+	})#
+	points_earned <- function(x){#
+		last <- x[nrow(x),]#
+		x[x == "A"] <- 45#
+		x <- apply(x, 2, as.numeric)#
+		x[-1,1] <- x[-1,1]	- x[-nrow(x),1]#
+		x[-1,2] <- x[-1,2]	- x[-nrow(x),2] #
+		if(any(last =="A")){#
+			 if(last[1] == "A")#
+			 	x <- rbind(x, c(1,0))#
+			 else#
+			 	x <- rbind(x, c(0, 1))#
+			}#
+		else{#
+			if(last[1] == "40")#
+					x <- rbind(x, c(1,0))#
+			 else#
+			 	x <- rbind(x, c(0, 1))	#
+		}#
+	 x[x > 0 ] <- 1#
+	 x[x[,1] < 0,2] <- 1#
+	 x[x[,2] < 0,1] <- 1#
+	 x[x < 0] <- 0#
+	x#
+	}#
+	points_won <- lapply(split_lines, points_earned) # Complete sequence#
+	points_won <- sapply(points_won, colSums) # Totals#
+	if(left.first.serve){#
+		left_serve_index <- seq(1, length(game_lines), by = 2)#
+		left_return_index <- seq(2, length(game_lines), by = 2)#
+	}#
+	else{#
+		left_serve_index <- seq(2, length(game_lines), by = 2)#
+		left_return_index <- seq(1, length(game_lines), by = 2)		#
+	}#
+	points_on_left_serve <- sum(points_won[1,left_serve_index])#
+	points_on_left_return <- sum(points_won[1,left_return_index])#
+	points_on_right_serve <- sum(points_won[2,left_return_index])#
+	points_on_right_return <- sum(points_won[2,left_serve_index])	#
+#
+	if(any(grepl("Tiebreak", lines))){#
+		set_results <- set_results[set_results > grep("Tiebreak", lines)]#
+		tiebreak <- strsplit(lines[set_results], split = "-")#
+		left <- as.numeric(sapply(tiebreak, function(x) x[1]))#
+		right <- as.numeric(sapply(tiebreak, function(x) x[2]))#
+		left <- c(left[1], diff(left))#
+		right <- c(right[1], diff(right))#
+		if(left.first.serve){#
+			left_index <- sort(c(1,seq(4, length(left), by = 4), seq(4, length(left), by = 4) + 1))#
+			left_index <- left_index[left_index <= length(left)]#
+			right_index <- (1:length(left))[!(1:length(left) %in% left_index)]#
+			}#
+	else{#
+			right_index <- sort(c(1,seq(4, length(left), by = 4), seq(4, length(left), by = 4) + 1))#
+			right_index <- right_index[right_index <= length(left)]#
+			left_index <- (1:length(left))[!(1:length(left) %in% right_index)]#
+		}#
+	points_on_left_serve <- points_on_left_serve + sum(left[left_index])#
+	points_on_left_return <- points_on_left_return + sum(left[right_index])#
+	points_on_right_serve <- points_on_right_serve  + sum(right[right_index])#
+	points_on_right_return <- points_on_right_return + sum(right[left_index])#
+	}#
+	output <- data.frame(#
+	 	Winner = c(1, 0)[c(winner_position, loser_position)],#
+		Players = c(left_name, right_name),#
+		Ranks = ranks,#
+		ServicePointsWon = c(points_on_left_serve, points_on_right_serve),#
+		ReturnPointsWon = c(points_on_left_return, points_on_right_return)#
+		)#
+	}#
+	output$TotalServicePoints <- c(#
+		output$ServicePointsWon[1] + output$ReturnPointsWon[2],#
+		output$ServicePointsWon[2] + output$ReturnPointsWon[1]#
+	)	#
+	output$TotalReturnPoints <- c(#
+		output$ReturnPointsWon[1] + output$ServicePointsWon[2],#
+		output$ReturnPointsWon[2] + output$ServicePointsWon[1]#
+	)		#
+#
+output	#
+}#
+get_matchids <- function(page){#
+#
+	page_lines <- readLines(page)#
+	split_lines <- strsplit(page_lines[grep("tournament-page-results", page_lines)], split = c("÷"))[[1]]#
+	index <- grep("AA$", split_lines)#
+as.character(sapply(split_lines[index + 1], function(x) substr(x, 1, 8)))#
+}#
+urls <- #
+	c(#
+	"http://www.flashscore.com/tennis/wta-singles/australian-open/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/wimbledon/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/french-open/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/us-open/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/cincinnati/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/indian-wells/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/madrid/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/miami/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/doha/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/rome/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/wuhan/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/beijing/results/",#
+	"http://www.flashscore.com/tennis/wta-singles/toronto/results/")
+tourney_ids <- get_matchids(urls[1])
+tourney_results_1 <-  lapply(tourney_ids[1:2], function(id) {#
+		tryCatch(get_stats(id, 1), error = function(x) NA)#
+		})
+tourney_results_1[[1]]
+tourney_results_1[[2]]
+tourney_ids[1:2]
+matchid <- "zcc9vzNp"
+set <- 1
+BaseUrl <- "http://www.flashscore.com/match/MATCHID/#point-by-point;SET"#
+	BaseUrl <- sub("MATCHID", matchid, BaseUrl)#
+	BaseUrl <- sub("SET", set, BaseUrl)#
+	remDr <-remoteDriver()#
+	remDr$open(silent = TRUE)#
+	on.exit(remDr$close())#
+	remDr$navigate(BaseUrl)#
+#	remDr$setImplicitWaitTimeout(3000)#
+    webElem <- remDr$findElements(using = 'id', "detail")#
+	match_stat_string <- unlist(lapply(webElem, function(x){x$getElementText()}))#
+#
+	lines <- strsplit(match_stat_string, split = "\n")[[1]]
+game_lines <- which(grepl("15:0|0:15", lines) & !grepl("\\.",lines)) # Make sure date line isn't included
+lines[game_lines[grep("BP",game_lines)]]
+lines[game_lines[grep("BP",lines[game_lines])]]
+quit("no")
+library(ggplot2)#
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY13/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY13/domain_scores.csv"#
+#
+trends <- read.csv("~/Project/ACO-CAHPS/improve/PY13/Trend_for_analysis.csv", stringsAsFactors  = FALSE)#
+#
+trends$SE.Change <- with(trends, sqrt(vp_y1 + vp_y2 - 2 * sqrt(vp_y1) * sqrt(vp_y2)))#
+trends$Change <- with(trends, (score0_100_y2 - score0_100_y1))#
+trends$Z <- with(trends, Change / SE.Change)#
+# Reliability#
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$item)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score0_100_y1),]	#
+		rel <- reliability(y$score0_100_y1, y$vp_y1, 11, 0)#
+		rel_full[!is.na(x$score0_100_y1)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score0_100_y2),]	#
+		rel <- reliability(y$score0_100_y2, y$vp_y2, 11, 0)#
+		rel_full[!is.na(x$score0_100_y2)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change),]	#
+		rel <- reliability(y$Change, y$SE.Change^2, 11, 0)#
+		rel_full[!is.na(x$Change)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$item),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)#
+trends$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)#
+#
+# Perfrormance Outliers#
+# Remove health and functional status#
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Subsetting and exclusions using change score reliability#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score0_100_y1),]#
+#
+sig_summary <- ddply(outliers, c("item"), summarize,#
+	Positive = sum(Z > 1.96, na.rm = TRUE),#
+	Negative = sum(Z < -1.96, na.rm = TRUE),#
+	TotalACOs = length(aco_id)#
+)#
+#
+write.table(sig_summary, file = sig_summary_file, row.names = FALSE, sep = ",")#
+outlier_summary <- ddply(outliers, c("item"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAccessed = sum(!is.na(Z))#
+)#
+write.table(outlier_summary, file = outlier_summary_file, row.names = FALSE, sep = ",")#
+outliers <- outliers[outliers$Z > 3 | outliers$Z < -3, ]	#
+#
+write.table(outliers, file = outlier_table_file, row.names = FALSE, sep = ",")#
+#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score0_100_y1),]#
+#
+aco_outlier_count <- ddply(outliers, c("aco_id"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAccessed = sum(!is.na(Z))#
+)		#
+#
+most_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$PositiveOutliers > 3], ]#
+most_improved <- most_improved[most_improved$Z > 3,]#
+most_improved <- most_improved[order(most_improved$aco_id),]			#
+#
+write.table(most_improved, file = most_improved_file, row.names = FALSE, sep = ",")		#
+least_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$NegativeOutliers > 4], ]#
+least_improved <- least_improved[least_improved$Z < -3,]#
+least_improved <- least_improved[order(least_improved$aco_id),]			#
+#
+write.table(least_improved, file = least_improved_file, row.names = FALSE, sep = ",")	#
+#
+# Domain scores#
+benchmarks <- read.csv("~/Project/ACO-CAHPS/improve/final_benchmarks.csv")#
+benchmarked_items <- unique(benchmarks$item)#
+#
+trends <- trends[trends$item %in% benchmarked_items,]#
+trends <- trends[!is.na(trends$score0_100_y1) & !is.na(trends$score0_100_y2),]#
+#
+points <- c(0, benchmarks$points[1:7])#
+Measure.Split <- split(trends, f = trends$item)#
+#
+# ASSIGN QUALITY POINTS#
+for(i in names(Measure.Split)){#
+#
+  Measure.Split[[i]]$Points1 <- cut(Measure.Split[[i]]$score0_100_y1, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Measure.Split[[i]]$score0_100_y2, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }     #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+QualityPoints <- data.frame(#
+  ACO = Measure.Split[[1]]$aco_id,#
+  PY1 = PY1,#
+  PY2 = PY2,#
+  Change = PY2-PY1#
+  )#
+#
+# BOOTSTRAP SCORES  #
+bivariate <- function(mu1,mu2,sigma1,sigma2,p){#
+	print(mu1)#
+  mvrnorm(1,mu=c(mu1,mu2),Sigma=matrix(c(sigma1,sqrt(sigma1)*sqrt(sigma2)*p,sqrt(sigma1)*sqrt(sigma2)*p,#
+                                         sigma2),2,2))#
+}#
+#
+BootStrap <- function(void){#
+for(i in names(Measure.Split)){#
+#
+  # RANDOM SAMPLE OF PY12 and PY13 SCORES#
+  Scores <- mapply(bivariate,#
+                   mu1=Measure.Split[[i]]$score0_100_y1,mu2=Measure.Split[[i]]$score0_100_y2,#
+                   sigma1=Measure.Split[[i]]$vp_y1, sigma2=Measure.Split[[i]]$vp_y2,#
+                   p=Measure.Split[[i]]$correlation)#
+  Measure.Split[[i]]$Points1 <- cut(Scores[1,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Scores[2,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }       #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+PY2 - PY1#
+}#
+#
+QualityScoreSD <- sapply(1:500,BootStrap)#
+QualityPoints$SD <- apply(QualityScoreSD,1, sd)#
+QualityPoints$Z <- QualityPoints$Change / QualityPoints$SD#
+#
+write.table(QualityPoints, file = domain_scores_file, row.names = FALSE, sep = ",")
+rm(list = ls())
+library(gdata)#
+library(ggplot2)#
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY14/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY14/domain_scores.csv"#
+#
+trends <- read.xls("~/Project/ACO-CAHPS/improve/PY14/Trend Analysis for Westat - Unmasked 19APR15.xls",#
+							sheet = 1, stringsAsFactors  = FALSE)#
+#
+trends$Score.2013 <- as.numeric(trends$Score.2013)#
+trends$Score.2014 <- as.numeric(trends$Score.2014)#
+trends$Variance.2013 <- as.numeric(trends$Variance.2013)#
+trends$Variance.2014 <- as.numeric(trends$Variance.2014)#
+trends$SE.Change <- as.numeric(trends$SE.Change)#
+trends$Z <- as.numeric(trends$Z)#
+trends$Change.2014.to.2013 <- as.numeric(trends$Change.2014.to.2013)#
+#
+# Reliability#
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$Summary.survey.measure..variable.)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Score.2013),]	#
+		rel <- reliability(y$Score.2013, y$Variance.2013, y$Number.of.Items.per.ACO, 0)#
+		rel_full[!is.na(x$Score.2013)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Score.2014),]	#
+		rel <- reliability(y$Score.2014, y$Variance.2014, y$Number.of.Items.per.ACO, 0)#
+		rel_full[!is.na(x$Score.2014)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change.2014.to.2013),]	#
+		rel <- reliability(y$Change.2014.to.2013, y$SE.Change^2, y$Number.of.Items.per.ACO, 0)#
+		rel_full[!is.na(x$Change.2014.to.2013)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$Summary.survey.measure..variable.),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)#
+trends$$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)#
+#
+# Perfrormance Outliers#
+# Remove health and functional status#
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Subsetting and exclusions using change score reliability#
+outliers <- trends[trends$Summary.survey.measure..variable. %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$Score.2013),]#
+#
+sig_summary <- ddply(outliers, c("Summary.survey.measure..name."), summarize,#
+	Positive = sum(Significant..Y.N. == "Y" & Change.2014.to.2013 > 0),#
+	Negative = sum(Significant..Y.N. == "Y" & Change.2014.to.2013 < 0),#
+	TotalACOs = length(ACO.ID)#
+)#
+write.table(sig_summary, file = sig_summary_file, row.names = FALSE, sep = ",")#
+ggplot(outliers, aes(y = Z, x = Score.2013)) + geom_point() + #
+	facet_wrap(~Summary.survey.measure..variable.)  + #
+	geom_hline(yintercept = c(-3.3, 3.3), col = c("red", "green")) +#
+	scale_y_continuous("Z-Score of PY14 - PY13 Change") + #
+	scale_x_continuous("PY13 Mean Score") #
+#
+ggsave(file = "~/Project/ACO-CAHPS/improve/PY14/change_outliers.pdf", width = 9, height = 8)#
+outlier_summary <- ddply(outliers, c("Summary.survey.measure..name."), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAccessed = sum(!is.na(Z))#
+)#
+write.table(outlier_summary, file = outlier_summary_file, row.names = FALSE, sep = ",")#
+outliers <- outliers[outliers$Z > 3 | outliers$Z < -3, ]	#
+#
+write.table(outliers, file = outlier_table_file, row.names = FALSE, sep = ",")#
+#
+outliers <- trends[trends$Summary.survey.measure..variable. %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$Score.2013),]#
+#
+aco_outlier_count <- ddply(outliers, c("ACO.ID"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAccessed = sum(!is.na(Z))#
+)		#
+#
+most_improved <- outliers[outliers$ACO.ID %in% aco_outlier_count$ACO.ID[aco_outlier_count$PositiveOutliers > 3], ]#
+most_improved <- most_improved[most_improved$Z > 3,]#
+most_improved <- most_improved[order(most_improved$ACO.ID),]			#
+#
+write.table(most_improved, file = most_improved_file, row.names = FALSE, sep = ",")		#
+least_improved <- outliers[outliers$ACO.ID %in% aco_outlier_count$ACO.ID[aco_outlier_count$NegativeOutliers > 4], ]#
+least_improved <- least_improved[least_improved$Z < -3,]#
+least_improved <- least_improved[order(least_improved$ACO.ID),]			#
+#
+write.table(least_improved, file = least_improved_file, row.names = FALSE, sep = ",")	#
+#
+# Domain scores#
+names(trends)[1] <- "item"#
+#
+trends$Score.2013 <- as.numeric(trends$Score.2013)#
+trends$Score.2014 <- as.numeric(trends$Score.2014)#
+trends$Variance.2013 <- as.numeric(trends$Variance.2013)#
+trends$Variance.2014 <- as.numeric(trends$Variance.2014)#
+trends$Correlation <- as.numeric(trends$Correlation)#
+#
+benchmarks <- read.csv("~/Project/ACO-CAHPS/improve/final_benchmarks.csv")#
+benchmarked_items <- unique(benchmarks$item)#
+#
+trends <- trends[trends$item %in% benchmarked_items,]#
+trends <- trends[!is.na(trends$Score.2013) & !is.na(trends$Score.2014),]#
+#
+points <- c(0, benchmarks$points[1:7])#
+Measure.Split <- split(trends, f = trends$item)#
+#
+# ASSIGN QUALITY POINTS#
+for(i in names(Measure.Split)){#
+#
+  Measure.Split[[i]]$Points1 <- cut(Measure.Split[[i]]$Score.2013, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Measure.Split[[i]]$Score.2014, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }     #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+QualityPoints <- data.frame(#
+  ACO = Measure.Split[[1]]$ACO.ID,#
+  PY1 = PY1,#
+  PY2 = PY2,#
+  Change = PY2-PY1#
+  )#
+#
+# BOOTSTRAP SCORES  #
+bivariate <- function(mu1,mu2,sigma1,sigma2,p){#
+  mvrnorm(1,mu=c(mu1,mu2),Sigma=matrix(c(sigma1,sqrt(sigma1)*sqrt(sigma2)*p,sqrt(sigma1)*sqrt(sigma2)*p,#
+                                         sigma2),2,2))#
+}#
+#
+BootStrap <- function(void){#
+for(i in names(Measure.Split)){#
+#
+  # RANDOM SAMPLE OF PY12 and PY13 SCORES#
+  Scores <- mapply(bivariate,#
+                   mu1=Measure.Split[[i]]$Score.2013,mu2=Measure.Split[[i]]$Score.2014,#
+                   sigma1=Measure.Split[[i]]$Variance.2013,sigma2=Measure.Split[[i]]$Variance.2014,#
+                   p=Measure.Split[[i]]$Correlation)#
+  Measure.Split[[i]]$Points1 <- cut(Scores[1,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Scores[2,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }       #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+PY2 - PY1#
+}#
+#
+QualityScoreSD <- sapply(1:500,BootStrap)#
+QualityPoints$SD <- apply(QualityScoreSD,1, sd)#
+QualityPoints$Z <- QualityPoints$Change / QualityPoints$SD#
+#
+write.table(QualityPoints, file = domain_scores_file, row.names = FALSE, sep = ",")
+library(gdata)#
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY14/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY14/domain_scores.csv"#
+#
+trends <- read.xls("~/Project/ACO-CAHPS/improve/PY14/Trend Analysis for Westat - Unmasked 19APR15.xls",#
+							sheet = 1, stringsAsFactors  = FALSE)#
+#
+trends$Score.2013 <- as.numeric(trends$Score.2013)#
+trends$Score.2014 <- as.numeric(trends$Score.2014)#
+trends$Variance.2013 <- as.numeric(trends$Variance.2013)#
+trends$Variance.2014 <- as.numeric(trends$Variance.2014)#
+trends$SE.Change <- as.numeric(trends$SE.Change)#
+trends$Z <- as.numeric(trends$Z)#
+trends$Change.2014.to.2013 <- as.numeric(trends$Change.2014.to.2013)#
+#
+# Reliability#
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$Summary.survey.measure..variable.)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Score.2013),]	#
+		rel <- reliability(y$Score.2013, y$Variance.2013, y$Number.of.Items.per.ACO, 0)#
+		rel_full[!is.na(x$Score.2013)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Score.2014),]	#
+		rel <- reliability(y$Score.2014, y$Variance.2014, y$Number.of.Items.per.ACO, 0)#
+		rel_full[!is.na(x$Score.2014)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change.2014.to.2013),]	#
+		rel <- reliability(y$Change.2014.to.2013, y$SE.Change^2, y$Number.of.Items.per.ACO, 0)#
+		rel_full[!is.na(x$Change.2014.to.2013)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$Summary.survey.measure..variable.),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)#
+trends$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)#
+#
+# Perfrormance Outliers#
+# Remove health and functional status#
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Subsetting and exclusions using change score reliability#
+outliers <- trends[trends$Summary.survey.measure..variable. %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$Score.2013),]#
+#
+sig_summary <- ddply(outliers, c("Summary.survey.measure..name."), summarize,#
+	Positive = sum(Significant..Y.N. == "Y" & Change.2014.to.2013 > 0),#
+	Negative = sum(Significant..Y.N. == "Y" & Change.2014.to.2013 < 0),#
+	TotalACOs = length(ACO.ID)#
+)#
+write.table(sig_summary, file = sig_summary_file, row.names = FALSE, sep = ",")#
+outlier_summary <- ddply(outliers, c("Summary.survey.measure..name."), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAccessed = sum(!is.na(Z))#
+)#
+write.table(outlier_summary, file = outlier_summary_file, row.names = FALSE, sep = ",")#
+outliers <- outliers[outliers$Z > 3 | outliers$Z < -3, ]	#
+#
+write.table(outliers, file = outlier_table_file, row.names = FALSE, sep = ",")#
+#
+outliers <- trends[trends$Summary.survey.measure..variable. %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$Score.2013),]#
+#
+aco_outlier_count <- ddply(outliers, c("ACO.ID"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAccessed = sum(!is.na(Z))#
+)		#
+#
+most_improved <- outliers[outliers$ACO.ID %in% aco_outlier_count$ACO.ID[aco_outlier_count$PositiveOutliers > 3], ]#
+most_improved <- most_improved[most_improved$Z > 3,]#
+most_improved <- most_improved[order(most_improved$ACO.ID),]			#
+#
+write.table(most_improved, file = most_improved_file, row.names = FALSE, sep = ",")		#
+least_improved <- outliers[outliers$ACO.ID %in% aco_outlier_count$ACO.ID[aco_outlier_count$NegativeOutliers > 4], ]#
+least_improved <- least_improved[least_improved$Z < -3,]#
+least_improved <- least_improved[order(least_improved$ACO.ID),]			#
+#
+write.table(least_improved, file = least_improved_file, row.names = FALSE, sep = ",")	#
+#
+# Domain scores#
+names(trends)[1] <- "item"#
+#
+trends$Score.2013 <- as.numeric(trends$Score.2013)#
+trends$Score.2014 <- as.numeric(trends$Score.2014)#
+trends$Variance.2013 <- as.numeric(trends$Variance.2013)#
+trends$Variance.2014 <- as.numeric(trends$Variance.2014)#
+trends$Correlation <- as.numeric(trends$Correlation)#
+#
+benchmarks <- read.csv("~/Project/ACO-CAHPS/improve/final_benchmarks.csv")#
+benchmarked_items <- unique(benchmarks$item)#
+#
+trends <- trends[trends$item %in% benchmarked_items,]#
+trends <- trends[!is.na(trends$Score.2013) & !is.na(trends$Score.2014),]#
+#
+points <- c(0, benchmarks$points[1:7])#
+Measure.Split <- split(trends, f = trends$item)#
+#
+# ASSIGN QUALITY POINTS#
+for(i in names(Measure.Split)){#
+#
+  Measure.Split[[i]]$Points1 <- cut(Measure.Split[[i]]$Score.2013, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Measure.Split[[i]]$Score.2014, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }     #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+QualityPoints <- data.frame(#
+  ACO = Measure.Split[[1]]$ACO.ID,#
+  PY1 = PY1,#
+  PY2 = PY2,#
+  Change = PY2-PY1#
+  )#
+#
+# BOOTSTRAP SCORES  #
+bivariate <- function(mu1,mu2,sigma1,sigma2,p){#
+  mvrnorm(1,mu=c(mu1,mu2),Sigma=matrix(c(sigma1,sqrt(sigma1)*sqrt(sigma2)*p,sqrt(sigma1)*sqrt(sigma2)*p,#
+                                         sigma2),2,2))#
+}#
+#
+BootStrap <- function(void){#
+for(i in names(Measure.Split)){#
+#
+  # RANDOM SAMPLE OF PY12 and PY13 SCORES#
+  Scores <- mapply(bivariate,#
+                   mu1=Measure.Split[[i]]$Score.2013,mu2=Measure.Split[[i]]$Score.2014,#
+                   sigma1=Measure.Split[[i]]$Variance.2013,sigma2=Measure.Split[[i]]$Variance.2014,#
+                   p=Measure.Split[[i]]$Correlation)#
+  Measure.Split[[i]]$Points1 <- cut(Scores[1,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Scores[2,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }       #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+PY2 - PY1#
+}#
+#
+QualityScoreSD <- sapply(1:500,BootStrap)#
+QualityPoints$SD <- apply(QualityScoreSD,1, sd)#
+QualityPoints$Z <- QualityPoints$Change / QualityPoints$SD#
+#
+write.table(QualityPoints, file = domain_scores_file, row.names = FALSE, sep = ",")
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY13/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY13/domain_scores.csv"#
+#
+trends <- read.csv("~/Project/ACO-CAHPS/improve/PY13/Trend_for_analysis.csv", stringsAsFactors  = FALSE)#
+#
+trends$SE.Change <- with(trends, sqrt(vp_y1 + vp_y2 - 2 * sqrt(vp_y1) * sqrt(vp_y2)))#
+trends$Change <- with(trends, (score0_100_y2 - score0_100_y1))#
+trends$Z <- with(trends, Change / SE.Change)
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$item)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score0_100_y1),]	#
+		rel <- reliability(y$score0_100_y1, y$vp_y1, 11, 0)#
+		rel_full[!is.na(x$score0_100_y1)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score0_100_y2),]	#
+		rel <- reliability(y$score0_100_y2, y$vp_y2, 11, 0)#
+		rel_full[!is.na(x$score0_100_y2)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change),]	#
+		rel <- reliability(y$Change, y$SE.Change^2, 11, 0)#
+		rel_full[!is.na(x$Change)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$item),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)#
+trends$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)#
+#
+# Perfrormance Outliers#
+# Remove health and functional status#
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Subsetting and exclusions using change score reliability#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score0_100_y1),]
+head(outliers)
+summary(outliers)
+length(unique(aco$aco_id))
+length(unique(outliers$aco_id))
+length(unique(trends$aco_id))
+sig_summary <- ddply(trends, c("item"), summarize,#
+	Positive = sum(Z > 1.96, na.rm = TRUE),#
+	Negative = sum(Z < -1.96, na.rm = TRUE),#
+	TotalACOs = length(aco_id)#
+)
+sig_summary
+summary(trends)
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY13/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY13/domain_scores.csv"#
+#
+trends <- read.csv("~/Project/ACO-CAHPS/improve/PY13/Trend_for_analysis.csv", stringsAsFactors  = FALSE)#
+#
+trends$SE.Change <- with(trends, sqrt(vp_y1 + vp_y2 - 2 * correlation * sqrt(vp_y1) * sqrt(vp_y2)))#
+trends$Change <- with(trends, (score0_100_y2 - score0_100_y1))#
+trends$Z <- with(trends, Change / SE.Change)#
+#
+# Reliability#
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$item)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score0_100_y1),]	#
+		rel <- reliability(y$score0_100_y1, y$vp_y1, 11, 0)#
+		rel_full[!is.na(x$score0_100_y1)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score0_100_y2),]	#
+		rel <- reliability(y$score0_100_y2, y$vp_y2, 11, 0)#
+		rel_full[!is.na(x$score0_100_y2)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change),]	#
+		rel <- reliability(y$Change, y$SE.Change^2, 11, 0)#
+		rel_full[!is.na(x$Change)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$item),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)#
+trends$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)#
+trends$n_items <- tapply(trends$ChangeVeryLowReliability, trends$aco_id, function(x) sum(x, na.rm = TRUE))[trends$aco_id]#
+#
+trends$Zvalue <- sapply(trends$n_items, function(x) qnorm((1-.05/(2*x))))#
+trends$Significant <- ifelse(abs(trends$Z) > trends$Zvalue, 1, 0)
+head(trends)
+subset(trends, aco_id == "A1004")
+trends$Zvalue <- sapply(trends$n_items, function(x) qnorm((1-.05/(2*x))))#
+trends$Significant <- ifelse(trends$n_items != 0 & abs(trends$Z) > trends$Zvalue, 1, 0)
+trends$Zvalue <- sapply(trends$n_items, function(x) if(x == 0) NA else qnorm((1-.05/(2*x))))
+sig_summary <- ddply(trends, c("item"), summarize,#
+	Positive = sum(Significant == 1& Z > 0, na.rm = TRUE),#
+	Negative = sum(Significant == 1& Z < 0, na.rm = TRUE),#
+	TotalACOs = sum(!is.na(score0_100_y1) & !is.na(score0_100_y2))#
+)
+sig_summary
+sig_summary <- ddply(trends, c("item"), summarize,#
+	Positive = sum(Significant == 1& Z > 0, na.rm = TRUE),#
+	Negative = sum(Significant == 1& Z < 0, na.rm = TRUE),#
+	TotalACOs = sum(!is.na(ReliabilityChange))#
+)
+sig_summary
+summary(trends$ChangeReliability)
+summary(trends$ReliabilityChange)
+sig_summary <- ddply(trends, c("item"), summarize,#
+	Positive = sum(Significant == 1& Z > 0, na.rm = TRUE),#
+	Negative = sum(Significant == 1& Z < 0, na.rm = TRUE),#
+	TotalACOs = sum(!is.na(ReliabilityChange) & ChangeVeryLowReliability == 0)#
+)
+sig_summary
+summary(trends)
+sig_summary <- ddply(trends, c("item"), summarize,#
+	Positive = sum(Significant == 1& !is.na(Z) & Z > 0, na.rm = TRUE),#
+	Negative = sum(Significant == 1& !is.na(Z) & Z < 0, na.rm = TRUE),#
+	TotalACOs = sum(!is.na(ReliabilityChange) & ChangeVeryLowReliability == 0)#
+)
+head(sig_summary)
+subset(trends, item == "C_EDU_MED" & Significant == 1)
+sig_summary <- ddply(trends, c("item"), summarize,#
+	Positive = sum(Significant == 1& ChangeVeryLowReliability == 0 & Z > 0, na.rm = TRUE),#
+	Negative = sum(Significant == 1& ChangeVeryLowReliability == 0 & Z < 0, na.rm = TRUE),#
+	TotalACOs = sum(!is.na(ReliabilityChange) & ChangeVeryLowReliability == 0)#
+)
+head(sig_summary)
+summary(trends$ReliabilityChange[trends$item == "C_EDU_MED"])
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score0_100_y1),]
+outlier_summary <- ddply(outliers, c("item"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAccessed = sum(!is.na(Z))#
+)
+head(outlier_summary )
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score0_100_y1),]
+head(outliers)
+outliers <- trends[trends$item %in% keep,]
+head(outliers)
+head(keep)
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Subsetting and exclusions using change score reliability#
+outliers <- trends[trends$item %in% keep,]
+head(outliers)
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score0_100_y1),]
+outlier_summary <- ddply(outliers, c("item"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAccessed = sum(!is.na(Z))#
+)
+head(outlier_summary)
+rm(list = ls())
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY13/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY13/domain_scores.csv"#
+#
+trend_file <- "~/Project/ACO-CAHPS/improve/PY13/Trend_for_analysis.csv" # CSV#
+benchmark_file <- "~/Project/ACO-CAHPS/improve/final_benchmarks.csv"#
+#
+# Set variables#
+score1 <- "score0_100_y1"#
+score2 <- "score0_100_y2"#
+variance1 <- "vp_y1"#
+variance2 <- "vp_y2"#
+correlation <-  "correlation"#
+# Run program#
+trends <- read.csv(trend_file, stringsAsFactors  = FALSE)#
+benchmarks <- read.csv(benchmark_file, stringsAsFactors  = FALSE)#
+#
+names(trends)[names(trends) == score1] <- "score1"#
+names(trends)[names(trends) == score2] <- "score2"#
+names(trends)[names(trends) == variance1] <- "variance1"#
+names(trends)[names(trends) == variance2] <- "variance2"#
+names(trends)[names(trends) == correlation] <- "correlation"#
+#
+trends$SE.Change <- with(trends, sqrt(variance1 + variance2 - 2 * correlation * sqrt(variance1) * sqrt(variance2)))#
+trends$Change <- with(trends, (score2 - score1))#
+trends$Z <- with(trends, Change / SE.Change)
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$item)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score1),]	#
+		rel <- reliability(y$score1, y$variance1, 11, 0)#
+		rel_full[!is.na(x$score1)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score2),]	#
+		rel <- reliability(y$score2, y$variance2, 11, 0)#
+		rel_full[!is.na(x$score2)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change),]	#
+		rel <- reliability(y$Change, y$SE.Change^2, 11, 0)#
+		rel_full[!is.na(x$Change)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$item),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)
+trends$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)
+trends$n_items <- tapply(trends$ChangeVeryLowReliability, trends$aco_id, function(x) sum(x, na.rm = TRUE))[trends$aco_id]
+head(trends)
+subset(trends, aco_id == "A1001")
+trends <- trends[order(trends$aco_id),]
+trends$n_items <- tapply(trends$ChangeVeryLowReliability, trends$aco_id, function(x) sum(x, na.rm = TRUE))[trends$aco_id]
+head(trends)
+trends$n_items <- tapply(trends$ChangeVeryLowReliability == 0, trends$aco_id, function(x) sum(x, na.rm = TRUE))[trends$aco_id]
+trends$Zvalue <- sapply(trends$n_items, function(x) if(x == 0) NA else qnorm((1-.05/(2*x))))#
+trends$Significant <- ifelse(trends$n_items != 0 & abs(trends$Z) > trends$Zvalue, 1, 0)
+head(trends)
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Outliers in change score#
+outliers <- trends[trends$item %in% keep,]
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]
+head(outliers)
+sig_summary <- ddply(outliers, c("item"), summarize,#
+	Positive = sum(Significant == 1& Z > 0),#
+	Negative = sum(Significant == 1& Z < 0),#
+	TotalACOs = length(item)#
+)
+head(sig_summary)
+outlier_summary <- ddply(outliers, c("item"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAccessed = sum(!is.na(Z))#
+)
+head(outlier_summary)
+benchmarked_items <- unique(benchmarks$item)#
+#
+trends <- trends[trends$item %in% benchmarked_items,]#
+trends <- trends[!is.na(trends$score1) & !is.na(trends$score2),]#
+#
+points <- c(0, benchmarks$points[1:7])#
+Measure.Split <- split(trends, f = trends$item)
+rm(list = ls())
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY13/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY13/domain_scores.csv"#
+#
+trend_file <- "~/Project/ACO-CAHPS/improve/PY13/Trend_for_analysis.csv" # CSV#
+benchmark_file <- "~/Project/ACO-CAHPS/improve/final_benchmarks.csv"#
+#
+# Set variables#
+score1 <- "score0_100_y1"#
+score2 <- "score0_100_y2"#
+variance1 <- "vp_y1"#
+variance2 <- "vp_y2"#
+correlation <-  "correlation"#
+aco_id <- "aco_id"#
+#
+# Run program#
+trends <- read.csv(trend_file, stringsAsFactors  = FALSE)#
+benchmarks <- read.csv(benchmark_file, stringsAsFactors  = FALSE)#
+#
+names(trends)[names(trends) == score1] <- "score1"#
+names(trends)[names(trends) == score2] <- "score2"#
+names(trends)[names(trends) == variance1] <- "variance1"#
+names(trends)[names(trends) == variance2] <- "variance2"#
+names(trends)[names(trends) == correlation] <- "correlation"#
+names(trends)[names(trends) == aco_id] <- "aco_id"#
+trends <- trends[order(trends$aco_id),]#
+#
+# Derive change variables#
+trends$SE.Change <- with(trends, sqrt(variance1 + variance2 - 2 * correlation * sqrt(variance1) * sqrt(variance2)))#
+trends$Change <- with(trends, (score2 - score1))#
+trends$Z <- with(trends, Change / SE.Change)#
+#
+# Compute reliabilities#
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$item)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score1),]	#
+		rel <- reliability(y$score1, y$variance1, 11, 0)#
+		rel_full[!is.na(x$score1)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score2),]	#
+		rel <- reliability(y$score2, y$variance2, 11, 0)#
+		rel_full[!is.na(x$score2)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change),]	#
+		rel <- reliability(y$Change, y$SE.Change^2, 11, 0)#
+		rel_full[!is.na(x$Change)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$item),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)#
+trends$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)#
+trends$n_items <- tapply(trends$ChangeVeryLowReliability == 0, trends$aco_id, function(x) sum(x, na.rm = TRUE))[trends$aco_id]#
+#
+trends$Zvalue <- sapply(trends$n_items, function(x) if(x == 0) NA else qnorm((1-.05/(2*x))))#
+trends$Significant <- ifelse(trends$n_items != 0 & abs(trends$Z) > trends$Zvalue, 1, 0)#
+#
+# Perfrormance Outliers#
+# Remove health and functional status#
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Outliers in change score#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]#
+#
+sig_summary <- ddply(outliers, c("item"), summarize,#
+	Positive = sum(Significant == 1& Z > 0),#
+	Negative = sum(Significant == 1& Z < 0),#
+	TotalACOs = length(item)#
+)#
+#
+write.table(sig_summary, file = sig_summary_file, row.names = FALSE, sep = ",")#
+outlier_summary <- ddply(outliers, c("item"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAssessed = length(Z)#
+write.table(outlier_summary, file = outlier_summary_file, row.names = FALSE, sep = ",")#
+outliers <- outliers[outliers$Z > 3 | outliers$Z < -3, ]	#
+write.table(outliers, file = outlier_table_file, row.names = FALSE, sep = ",")#
+#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]#
+#
+aco_outlier_count <- ddply(outliers, c("aco_id"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAssessed = length(Z)#
+)		#
+#
+most_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$PositiveOutliers > 3], ]#
+most_improved <- most_improved[most_improved$Z > 3,]#
+most_improved <- most_improved[order(most_improved$aco_id),]			#
+#
+write.table(most_improved, file = most_improved_file, row.names = FALSE, sep = ",")		#
+least_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$NegativeOutliers > 4], ]#
+least_improved <- least_improved[least_improved$Z < -3,]#
+least_improved <- least_improved[order(least_improved$aco_id),]			#
+#
+write.table(least_improved, file = least_improved_file, row.names = FALSE, sep = ",")	#
+#
+# Domain scores#
+benchmarked_items <- unique(benchmarks$item)#
+#
+trends <- trends[trends$item %in% benchmarked_items,]#
+trends <- trends[!is.na(trends$score1) & !is.na(trends$score2),]#
+#
+points <- c(0, benchmarks$points[1:7])#
+Measure.Split <- split(trends, f = trends$item)#
+#
+# ASSIGN QUALITY POINTS#
+for(i in names(Measure.Split)){#
+#
+  Measure.Split[[i]]$Points1 <- cut(Measure.Split[[i]]$score1, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Measure.Split[[i]]$score2, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }     #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+QualityPoints <- data.frame(#
+  ACO = Measure.Split[[1]]$aco_id,#
+  PY1 = PY1,#
+  PY2 = PY2,#
+  Change = PY2-PY1#
+  )#
+#
+# BOOTSTRAP SCORES  #
+bivariate <- function(mu1,mu2,sigma1,sigma2,p){#
+  mvrnorm(1,mu=c(mu1,mu2),Sigma=matrix(c(sigma1,sqrt(sigma1)*sqrt(sigma2)*p,sqrt(sigma1)*sqrt(sigma2)*p,#
+                                         sigma2),2,2))#
+}#
+#
+BootStrap <- function(void){#
+for(i in names(Measure.Split)){#
+#
+  # RANDOM SAMPLE OF PY12 and PY13 SCORES#
+  Scores <- mapply(bivariate,#
+                   mu1=Measure.Split[[i]]$score1,mu2=Measure.Split[[i]]$score2,#
+                   sigma1=Measure.Split[[i]]$variance1, sigma2=Measure.Split[[i]]$variance2,#
+                   p=Measure.Split[[i]]$correlation)#
+  Measure.Split[[i]]$Points1 <- cut(Scores[1,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Scores[2,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }       #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+PY2 - PY1#
+}#
+#
+QualityScoreSD <- sapply(1:500,BootStrap)#
+QualityPoints$SD <- apply(QualityScoreSD,1, sd)#
+QualityPoints$Z <- QualityPoints$Change / QualityPoints$SD#
+#
+write.table(QualityPoints, file = domain_scores_file, row.names = FALSE, sep = ",")
+rm(list = ls())
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY13/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY13/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY13/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY13/domain_scores.csv"#
+#
+trend_file <- "~/Project/ACO-CAHPS/improve/PY13/Trend_for_analysis.csv" # CSV#
+benchmark_file <- "~/Project/ACO-CAHPS/improve/final_benchmarks.csv"#
+#
+# Set variables#
+score1 <- "score0_100_y1"#
+score2 <- "score0_100_y2"#
+variance1 <- "vp_y1"#
+variance2 <- "vp_y2"#
+correlation <-  "correlation"#
+aco_id <- "aco_id"#
+#
+# Run program#
+trends <- read.csv(trend_file, stringsAsFactors  = FALSE)#
+benchmarks <- read.csv(benchmark_file, stringsAsFactors  = FALSE)#
+#
+names(trends)[names(trends) == score1] <- "score1"#
+names(trends)[names(trends) == score2] <- "score2"#
+names(trends)[names(trends) == variance1] <- "variance1"#
+names(trends)[names(trends) == variance2] <- "variance2"#
+names(trends)[names(trends) == correlation] <- "correlation"#
+names(trends)[names(trends) == aco_id] <- "aco_id"#
+trends <- trends[order(trends$aco_id),]#
+#
+# Derive change variables#
+trends$SE.Change <- with(trends, sqrt(variance1 + variance2 - 2 * correlation * sqrt(variance1) * sqrt(variance2)))#
+trends$Change <- with(trends, (score2 - score1))#
+trends$Z <- with(trends, Change / SE.Change)#
+#
+# Compute reliabilities#
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$item)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score1),]	#
+		rel <- reliability(y$score1, y$variance1, 11, 0)#
+		rel_full[!is.na(x$score1)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score2),]	#
+		rel <- reliability(y$score2, y$variance2, 11, 0)#
+		rel_full[!is.na(x$score2)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change),]	#
+		rel <- reliability(y$Change, y$SE.Change^2, 11, 0)#
+		rel_full[!is.na(x$Change)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$item),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)#
+trends$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)#
+trends$n_items <- tapply(trends$ChangeVeryLowReliability == 0, trends$aco_id, function(x) sum(x, na.rm = TRUE))[trends$aco_id]#
+#
+trends$Zvalue <- sapply(trends$n_items, function(x) if(x == 0) NA else qnorm((1-.05/(2*x))))#
+trends$Significant <- ifelse(trends$n_items != 0 & abs(trends$Z) > trends$Zvalue, 1, 0)#
+#
+# Perfrormance Outliers#
+# Remove health and functional status#
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Outliers in change score#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]#
+#
+sig_summary <- ddply(outliers, c("item"), summarize,#
+	Positive = sum(Significant == 1& Z > 0),#
+	Negative = sum(Significant == 1& Z < 0),#
+	TotalACOs = length(item)#
+)#
+#
+write.table(sig_summary, file = sig_summary_file, row.names = FALSE, sep = ",")#
+outlier_summary <- ddply(outliers, c("item"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAssessed = length(Z)#
+)		#
+write.table(outlier_summary, file = outlier_summary_file, row.names = FALSE, sep = ",")#
+outliers <- outliers[outliers$Z > 3 | outliers$Z < -3, ]	#
+write.table(outliers, file = outlier_table_file, row.names = FALSE, sep = ",")#
+#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]#
+#
+aco_outlier_count <- ddply(outliers, c("aco_id"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAssessed = length(Z)#
+)		#
+#
+most_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$PositiveOutliers > 3], ]#
+most_improved <- most_improved[most_improved$Z > 3,]#
+most_improved <- most_improved[order(most_improved$aco_id),]			#
+#
+write.table(most_improved, file = most_improved_file, row.names = FALSE, sep = ",")		#
+least_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$NegativeOutliers > 4], ]#
+least_improved <- least_improved[least_improved$Z < -3,]#
+least_improved <- least_improved[order(least_improved$aco_id),]			#
+#
+write.table(least_improved, file = least_improved_file, row.names = FALSE, sep = ",")	#
+#
+# Domain scores#
+benchmarked_items <- unique(benchmarks$item)#
+#
+trends <- trends[trends$item %in% benchmarked_items,]#
+trends <- trends[!is.na(trends$score1) & !is.na(trends$score2),]#
+#
+points <- c(0, benchmarks$points[1:7])#
+Measure.Split <- split(trends, f = trends$item)#
+#
+# ASSIGN QUALITY POINTS#
+for(i in names(Measure.Split)){#
+#
+  Measure.Split[[i]]$Points1 <- cut(Measure.Split[[i]]$score1, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Measure.Split[[i]]$score2, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }     #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+QualityPoints <- data.frame(#
+  ACO = Measure.Split[[1]]$aco_id,#
+  PY1 = PY1,#
+  PY2 = PY2,#
+  Change = PY2-PY1#
+  )#
+#
+# BOOTSTRAP SCORES  #
+bivariate <- function(mu1,mu2,sigma1,sigma2,p){#
+  mvrnorm(1,mu=c(mu1,mu2),Sigma=matrix(c(sigma1,sqrt(sigma1)*sqrt(sigma2)*p,sqrt(sigma1)*sqrt(sigma2)*p,#
+                                         sigma2),2,2))#
+}#
+#
+BootStrap <- function(void){#
+for(i in names(Measure.Split)){#
+#
+  # RANDOM SAMPLE OF PY12 and PY13 SCORES#
+  Scores <- mapply(bivariate,#
+                   mu1=Measure.Split[[i]]$score1,mu2=Measure.Split[[i]]$score2,#
+                   sigma1=Measure.Split[[i]]$variance1, sigma2=Measure.Split[[i]]$variance2,#
+                   p=Measure.Split[[i]]$correlation)#
+  Measure.Split[[i]]$Points1 <- cut(Scores[1,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Scores[2,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }       #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+PY2 - PY1#
+}#
+#
+QualityScoreSD <- sapply(1:500,BootStrap)#
+QualityPoints$SD <- apply(QualityScoreSD,1, sd)#
+QualityPoints$Z <- QualityPoints$Change / QualityPoints$SD#
+#
+write.table(QualityPoints, file = domain_scores_file, row.names = FALSE, sep = ",")
+trends <- read.csv("~/Project/ACO-CAHPS/improve/PY14/Trend Analysis for Westat - Unmasked 19APR15.csv",#
+							stringsAsFactors  = FALSE)
+head(trends)
+rm(list = ls())
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY14/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY14/domain_scores.csv"#
+#
+trend_file <- "~/Project/ACO-CAHPS/improve/PY14/Trend Analysis for Westat - Unmasked 19APR15.csv" # CSV#
+benchmark_file <- "~/Project/ACO-CAHPS/improve/final_benchmarks.csv"#
+#
+# Set variables#
+score1 <- "score1"#
+score2 <- "score2"#
+variance1 <- "v1"#
+variance2 <- "v2"#
+correlation <-  "correlation"#
+aco_id <- "aco_id"#
+#
+# Run program#
+trends <- read.csv(trend_file, stringsAsFactors  = FALSE)#
+benchmarks <- read.csv(benchmark_file, stringsAsFactors  = FALSE)#
+#
+names(trends)[names(trends) == score1] <- "score1"#
+names(trends)[names(trends) == score2] <- "score2"#
+names(trends)[names(trends) == variance1] <- "variance1"#
+names(trends)[names(trends) == variance2] <- "variance2"#
+names(trends)[names(trends) == correlation] <- "correlation"#
+names(trends)[names(trends) == aco_id] <- "aco_id"#
+trends <- trends[order(trends$aco_id),]#
+#
+# Derive change variables#
+trends$SE.Change <- with(trends, sqrt(variance1 + variance2 - 2 * correlation * sqrt(variance1) * sqrt(variance2)))#
+trends$Change <- with(trends, (score2 - score1))#
+trends$Z <- with(trends, Change / SE.Change)#
+#
+# Compute reliabilities#
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$item)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score1),]	#
+		rel <- reliability(y$score1, y$variance1, 11, 0)#
+		rel_full[!is.na(x$score1)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score2),]	#
+		rel <- reliability(y$score2, y$variance2, 11, 0)#
+		rel_full[!is.na(x$score2)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change),]	#
+		rel <- reliability(y$Change, y$SE.Change^2, 11, 0)#
+		rel_full[!is.na(x$Change)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$item),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)#
+trends$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)#
+trends$n_items <- tapply(trends$ChangeVeryLowReliability == 0, trends$aco_id, function(x) sum(x, na.rm = TRUE))[trends$aco_id]#
+#
+trends$Zvalue <- sapply(trends$n_items, function(x) if(x == 0) NA else qnorm((1-.05/(2*x))))#
+trends$Significant <- ifelse(trends$n_items != 0 & abs(trends$Z) > trends$Zvalue, 1, 0)#
+#
+# Perfrormance Outliers#
+# Remove health and functional status#
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Outliers in change score#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]#
+#
+sig_summary <- ddply(outliers, c("item"), summarize,#
+	Positive = sum(Significant == 1& Z > 0),#
+	Negative = sum(Significant == 1& Z < 0),#
+	TotalACOs = length(item)#
+)#
+#
+write.table(sig_summary, file = sig_summary_file, row.names = FALSE, sep = ",")#
+outlier_summary <- ddply(outliers, c("item"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAssessed = length(Z)#
+)		#
+write.table(outlier_summary, file = outlier_summary_file, row.names = FALSE, sep = ",")#
+outliers <- outliers[outliers$Z > 3 | outliers$Z < -3, ]	#
+write.table(outliers, file = outlier_table_file, row.names = FALSE, sep = ",")#
+#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]#
+#
+aco_outlier_count <- ddply(outliers, c("aco_id"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAssessed = length(Z)#
+)		#
+#
+most_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$PositiveOutliers > 3], ]#
+most_improved <- most_improved[most_improved$Z > 3,]#
+most_improved <- most_improved[order(most_improved$aco_id),]			#
+#
+write.table(most_improved, file = most_improved_file, row.names = FALSE, sep = ",")		#
+least_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$NegativeOutliers > 4], ]#
+least_improved <- least_improved[least_improved$Z < -3,]#
+least_improved <- least_improved[order(least_improved$aco_id),]			#
+#
+write.table(least_improved, file = least_improved_file, row.names = FALSE, sep = ",")	#
+#
+# Domain scores#
+benchmarked_items <- unique(benchmarks$item)#
+#
+trends <- trends[trends$item %in% benchmarked_items,]#
+trends <- trends[!is.na(trends$score1) & !is.na(trends$score2),]#
+#
+points <- c(0, benchmarks$points[1:7])#
+Measure.Split <- split(trends, f = trends$item)#
+#
+# ASSIGN QUALITY POINTS#
+for(i in names(Measure.Split)){#
+#
+  Measure.Split[[i]]$Points1 <- cut(Measure.Split[[i]]$score1, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Measure.Split[[i]]$score2, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }     #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+QualityPoints <- data.frame(#
+  ACO = Measure.Split[[1]]$aco_id,#
+  PY1 = PY1,#
+  PY2 = PY2,#
+  Change = PY2-PY1#
+  )#
+#
+# BOOTSTRAP SCORES  #
+bivariate <- function(mu1,mu2,sigma1,sigma2,p){#
+  mvrnorm(1,mu=c(mu1,mu2),Sigma=matrix(c(sigma1,sqrt(sigma1)*sqrt(sigma2)*p,sqrt(sigma1)*sqrt(sigma2)*p,#
+                                         sigma2),2,2))#
+}#
+#
+BootStrap <- function(void){#
+for(i in names(Measure.Split)){#
+#
+  # RANDOM SAMPLE OF PY12 and PY13 SCORES#
+  Scores <- mapply(bivariate,#
+                   mu1=Measure.Split[[i]]$score1,mu2=Measure.Split[[i]]$score2,#
+                   sigma1=Measure.Split[[i]]$variance1, sigma2=Measure.Split[[i]]$variance2,#
+                   p=Measure.Split[[i]]$correlation)#
+  Measure.Split[[i]]$Points1 <- cut(Scores[1,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Scores[2,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }       #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+PY2 - PY1#
+}#
+#
+QualityScoreSD <- sapply(1:500,BootStrap)#
+QualityPoints$SD <- apply(QualityScoreSD,1, sd)#
+QualityPoints$Z <- QualityPoints$Change / QualityPoints$SD#
+#
+write.table(QualityPoints, file = domain_scores_file, row.names = FALSE, sep = ",")
+str(trends)
+rm(list = ls())
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY14/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY14/domain_scores.csv"#
+#
+trend_file <- "~/Project/ACO-CAHPS/improve/PY14/Trend Analysis for Westat - Unmasked 19APR15.csv" # CSV#
+benchmark_file <- "~/Project/ACO-CAHPS/improve/final_benchmarks.csv"#
+#
+# Set variables#
+score1 <- "score1"#
+score2 <- "score2"#
+variance1 <- "v1"#
+variance2 <- "v2"#
+correlation <-  "correlation"#
+aco_id <- "aco_id"#
+#
+trends$score1 <- as.numeric(trends$score1)#
+trends$score2 <- as.numeric(trends$score2)#
+trends$v1 <- as.numeric(trends$v1)#
+trends$v2 <- as.numeric(trends$v2)#
+trends$correlation <- as.numeric(trends$correlation)
+trends <- read.csv(trend_file, stringsAsFactors  = FALSE)#
+benchmarks <- read.csv(benchmark_file, stringsAsFactors  = FALSE)#
+#
+trends$score1 <- as.numeric(trends$score1)#
+trends$score2 <- as.numeric(trends$score2)#
+trends$v1 <- as.numeric(trends$v1)#
+trends$v2 <- as.numeric(trends$v2)#
+trends$correlation <- as.numeric(trends$correlation)
+rm(list = ls())
+library(plyr)#
+library(MASS)#
+#
+sig_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/trends_summary.csv"#
+outlier_summary_file <- "~/Project/ACO-CAHPS/improve/PY14/outlier_summary.csv"#
+outlier_table_file <-  "~/Project/ACO-CAHPS/improve/PY14/outlier_table.csv"#
+most_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/most_improved.csv"#
+least_improved_file <- "~/Project/ACO-CAHPS/improve/PY14/least_improved.csv"#
+domain_scores_file <- "~/Project/ACO-CAHPS/improve/PY14/domain_scores.csv"#
+#
+trend_file <- "~/Project/ACO-CAHPS/improve/PY14/Trend Analysis for Westat - Unmasked 19APR15.csv" # CSV#
+benchmark_file <- "~/Project/ACO-CAHPS/improve/final_benchmarks.csv"#
+#
+# Set variables#
+score1 <- "score1"#
+score2 <- "score2"#
+variance1 <- "v1"#
+variance2 <- "v2"#
+correlation <-  "correlation"#
+aco_id <- "aco_id"#
+#
+# Run program#
+trends <- read.csv(trend_file, stringsAsFactors  = FALSE)#
+benchmarks <- read.csv(benchmark_file, stringsAsFactors  = FALSE)#
+#
+trends$score1 <- as.numeric(trends$score1)#
+trends$score2 <- as.numeric(trends$score2)#
+trends$v1 <- as.numeric(trends$v1)#
+trends$v2 <- as.numeric(trends$v2)#
+trends$correlation <- as.numeric(trends$correlation)#
+#
+names(trends)[names(trends) == score1] <- "score1"#
+names(trends)[names(trends) == score2] <- "score2"#
+names(trends)[names(trends) == variance1] <- "variance1"#
+names(trends)[names(trends) == variance2] <- "variance2"#
+names(trends)[names(trends) == correlation] <- "correlation"#
+names(trends)[names(trends) == aco_id] <- "aco_id"#
+trends <- trends[order(trends$aco_id),]#
+#
+# Derive change variables#
+trends$SE.Change <- with(trends, sqrt(variance1 + variance2 - 2 * correlation * sqrt(variance1) * sqrt(variance2)))#
+trends$Change <- with(trends, (score2 - score1))#
+trends$Z <- with(trends, Change / SE.Change)#
+#
+# Compute reliabilities#
+source("~/Code/cahpsr/R/reliability.R")#
+#
+trends_1split <- split(trends, f = trends$item)#
+#
+Reliability2013 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score1),]	#
+		rel <- reliability(y$score1, y$variance1, 11, 0)#
+		rel_full[!is.na(x$score1)] <- rel#
+		rel_full#
+		})#
+Reliability2014 <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$score2),]	#
+		rel <- reliability(y$score2, y$variance2, 11, 0)#
+		rel_full[!is.na(x$score2)] <- rel#
+		rel_full#
+		})#
+#
+ReliabilityChange <- lapply(trends_1split, #
+		function(x) {#
+		rel_full <- NA#
+		y <- x[!is.na(x$Change),]	#
+		rel <- reliability(y$Change, y$SE.Change^2, 11, 0)#
+		rel_full[!is.na(x$Change)] <- rel#
+		rel_full#
+		})#
+trends <- trends[order(trends$item),]#
+trends$Reliability2013 <- unlist(Reliability2013)#
+trends$Reliability2014 <- unlist(Reliability2014)#
+trends$ReliabilityChange <- unlist(ReliabilityChange)#
+trends$ChangeVeryLowReliability <- ifelse(trends$ReliabilityChange < 0.6, 1, 0)#
+trends$n_items <- tapply(trends$ChangeVeryLowReliability == 0, trends$aco_id, function(x) sum(x, na.rm = TRUE))[trends$aco_id]#
+#
+trends$Zvalue <- sapply(trends$n_items, function(x) if(x == 0) NA else qnorm((1-.05/(2*x))))#
+trends$Significant <- ifelse(trends$n_items != 0 & abs(trends$Z) > trends$Zvalue, 1, 0)#
+#
+# Perfrormance Outliers#
+# Remove health and functional status#
+keep <- c("APPT_REM", "C_ACCESS", "C_COMM", "C_COORD", "C_EDU_MED", #
+"C_SDM_MED", "C_SDM_SHARE", "C_SDM_SURG", "C_SPEC", "C_STAFF", "M_HLTH_PROMO", "M_SDM", "MD_COST", "RATE_MD")#
+#
+# Outliers in change score#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]#
+#
+sig_summary <- ddply(outliers, c("item"), summarize,#
+	Positive = sum(Significant == 1& Z > 0),#
+	Negative = sum(Significant == 1& Z < 0),#
+	TotalACOs = length(item)#
+)#
+#
+write.table(sig_summary, file = sig_summary_file, row.names = FALSE, sep = ",")#
+outlier_summary <- ddply(outliers, c("item"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAssessed = length(Z)#
+)		#
+write.table(outlier_summary, file = outlier_summary_file, row.names = FALSE, sep = ",")#
+outliers <- outliers[outliers$Z > 3 | outliers$Z < -3, ]	#
+write.table(outliers, file = outlier_table_file, row.names = FALSE, sep = ",")#
+#
+outliers <- trends[trends$item %in% keep,]#
+outliers <- outliers[outliers$ChangeVeryLowReliability != 1,]#
+outliers <- outliers[!is.na(outliers$score1) & !is.na(outliers$score2),]#
+#
+aco_outlier_count <- ddply(outliers, c("aco_id"), summarize,#
+	PositiveOutliers = sum(Z > 3),#
+	NegativeOutliers = sum(Z < -3),#
+	TotalsAssessed = length(Z)#
+)		#
+#
+most_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$PositiveOutliers > 3], ]#
+most_improved <- most_improved[most_improved$Z > 3,]#
+most_improved <- most_improved[order(most_improved$aco_id),]			#
+#
+write.table(most_improved, file = most_improved_file, row.names = FALSE, sep = ",")		#
+least_improved <- outliers[outliers$aco_id %in% aco_outlier_count$aco_id[aco_outlier_count$NegativeOutliers > 4], ]#
+least_improved <- least_improved[least_improved$Z < -3,]#
+least_improved <- least_improved[order(least_improved$aco_id),]			#
+#
+write.table(least_improved, file = least_improved_file, row.names = FALSE, sep = ",")	#
+#
+# Domain scores#
+benchmarked_items <- unique(benchmarks$item)#
+#
+trends <- trends[trends$item %in% benchmarked_items,]#
+trends <- trends[!is.na(trends$score1) & !is.na(trends$score2),]#
+#
+points <- c(0, benchmarks$points[1:7])#
+Measure.Split <- split(trends, f = trends$item)#
+#
+# ASSIGN QUALITY POINTS#
+for(i in names(Measure.Split)){#
+#
+  Measure.Split[[i]]$Points1 <- cut(Measure.Split[[i]]$score1, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Measure.Split[[i]]$score2, #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }     #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+QualityPoints <- data.frame(#
+  ACO = Measure.Split[[1]]$aco_id,#
+  PY1 = PY1,#
+  PY2 = PY2,#
+  Change = PY2-PY1#
+  )#
+#
+# BOOTSTRAP SCORES  #
+bivariate <- function(mu1,mu2,sigma1,sigma2,p){#
+  mvrnorm(1,mu=c(mu1,mu2),Sigma=matrix(c(sigma1,sqrt(sigma1)*sqrt(sigma2)*p,sqrt(sigma1)*sqrt(sigma2)*p,#
+                                         sigma2),2,2))#
+}#
+#
+BootStrap <- function(void){#
+for(i in names(Measure.Split)){#
+#
+  # RANDOM SAMPLE OF PY12 and PY13 SCORES#
+  Scores <- mapply(bivariate,#
+                   mu1=Measure.Split[[i]]$score1,mu2=Measure.Split[[i]]$score2,#
+                   sigma1=Measure.Split[[i]]$variance1, sigma2=Measure.Split[[i]]$variance2,#
+                   p=Measure.Split[[i]]$correlation)#
+  Measure.Split[[i]]$Points1 <- cut(Scores[1,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+#
+  Measure.Split[[i]]$Points2 <- cut(Scores[2,], #
+                                   breaks = c(0, subset(benchmarks, item == i)$criterion,Inf),#
+                                   right = FALSE, labels=points)#
+  }       #
+# TOTAL SCORES#
+PY1 <- as.numeric(levels(Measure.Split[[1]]$Points1)[Measure.Split[[1]]$Points1])+#
+  as.numeric(levels(Measure.Split[[2]]$Points1)[Measure.Split[[2]]$Points1])+#
+  as.numeric(levels(Measure.Split[[3]]$Points1)[Measure.Split[[3]]$Points1])+#
+  as.numeric(levels(Measure.Split[[4]]$Points1)[Measure.Split[[4]]$Points1])+#
+  as.numeric(levels(Measure.Split[[5]]$Points1)[Measure.Split[[5]]$Points1])+#
+  as.numeric(levels(Measure.Split[[6]]$Points1)[Measure.Split[[6]]$Points1])+2#
+#
+PY2 <- as.numeric(levels(Measure.Split[[1]]$Points2)[Measure.Split[[1]]$Points2])+#
+  as.numeric(levels(Measure.Split[[2]]$Points2)[Measure.Split[[2]]$Points2])+#
+  as.numeric(levels(Measure.Split[[3]]$Points2)[Measure.Split[[3]]$Points2])+#
+  as.numeric(levels(Measure.Split[[4]]$Points2)[Measure.Split[[4]]$Points2])+#
+  as.numeric(levels(Measure.Split[[5]]$Points2)[Measure.Split[[5]]$Points2])+#
+  as.numeric(levels(Measure.Split[[6]]$Points2)[Measure.Split[[6]]$Points2])+2#
+#
+PY2 - PY1#
+}#
+#
+QualityScoreSD <- sapply(1:500,BootStrap)#
+QualityPoints$SD <- apply(QualityScoreSD,1, sd)#
+QualityPoints$Z <- QualityPoints$Change / QualityPoints$SD#
+#
+write.table(QualityPoints, file = domain_scores_file, row.names = FALSE, sep = ",")
+quit("no")
+library(slidify)
+setwd("~/Project/tennis/validation/mathsport_2015/")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+slidify("index.Rmd")
+had(combine)
+head(combine)
+library(gdata)#
+#
+rp12 <- read.xls("~/Project/ACO-CAHPS/ResponseRate/ACO RP12-14 Mixed Models Predicting COMPLETE and CATI 23JUN15.xlsx", sheet = 1)#
+#
+rp13 <- read.xls("~/Project/ACO-CAHPS/ResponseRate/ACO RP12-14 Mixed Models Predicting COMPLETE and CATI 23JUN15.xlsx", sheet = 3)#
+rp14 <- read.xls("~/Project/ACO-CAHPS/ResponseRate/ACO RP12-14 Mixed Models Predicting COMPLETE and CATI 23JUN15.xlsx", sheet = 5)#
+#
+# Combine#
+combine <- merge(rp12, rp13, all = TRUE, by = "ACO")#
+combine <- merge(combine, rp14, all = TRUE, by = "ACO")#
+#
+combine$diff12 <- combine$Observed...x - combine$Predicted...x#
+combine$diff13 <- combine$Observed...y - combine$Predicted...y#
+combine$diff14 <- combine$Observed.. - combine$Predicted..#
+#
+combine$Outlier <- apply(combine[,c("diff12", "diff13", "diff14")], 1, function(x) any(!is.na(x) & (x > 4 | x < -4)))#
+combine <- combine[combine$Outlier, c("ACO", "Observed...x", "diff12", "Observed...y", "diff13", "Observed..", "diff14")]#
+combine <- combine[order(combine$diff12),]#
+#
+write.table(combine, file = "~/Project/ACO-CAHPS/ResponseRate/ACO RP12-14 Mixed Models Predicting COMPLETE and CATI 23JUN15.csv", sep = ",", row.names = FALSE)
+table(combine$diff12 > 0, useNA = "always")
+table(combine$diff13 > 0, useNA = "always")
+table(combine$diff14 > 0, useNA = "always")
+table(combine$diff12 < 0, useNA = "always")

@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Comparative performance of models to forecast match wins in professional tennis</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Comparative performance of models to forecast match wins in professional tennis">
+  <meta name="author" content="Stephanie A. Kovalchik, skovalch@rand.org">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/solarized_light.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/morris/css/morris.css"></link>
+<link rel=stylesheet href="./assets/css/styles.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  <script src="libraries/widgets/highcharts/js/jquery-1.9.1.min.js"></script>
+<script src="libraries/widgets/highcharts/js/highcharts.js"></script>
+<script src="libraries/widgets/highcharts/js/highcharts-more.js"></script>
+<script src="libraries/widgets/highcharts/js/exporting.js"></script>
+<script src="libraries/widgets/polycharts/js/polychart2.standalone.js"></script>
+<script src="libraries/widgets/morris/js/jquery-1.8.2.min.js"></script>
+<script src="libraries/widgets/morris/js/raphael-2.1.0.min.js"></script>
+<script src="libraries/widgets/morris/js/morris.min.js"></script>
+
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Comparative performance of models to forecast match wins in professional tennis</h1>
+    <h2>Is there a GOAT for tennis prediction?</h2>
+    <p>Stephanie A. Kovalchik, skovalch@rand.org<br/>2015 Mathsport International</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <!-- Limit image width and height -->
+
+<style type='text/css'>
+img {
+    max-height: 560px;
+    max-width: 964px;
+}
+</style>
+
+<!-- Center image on slide -->
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+
+<script type='text/javascript'>
+$(function() {
+    $("p:has(img)").addClass('centered');
+});
+</script>
+
+<h2>Predicting Wins in Tennis</h2>
+
+<ul class = "build incremental">
+<li><p>Forecasting the winner of a competition is a fascination of all sports</p></li>
+<li><p>Tennis has a long history of interest (and frustration) with predicting match outcomes</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Predicting Wins in Tennis</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <blockquote>
+<p>It would have puzzled the canniest card in the business all the same to pick a winner out of these gentleman, any one of which was liable to develop a streak and win out.</p>
+
+<p><cite>Lawn Tennis Guide, 1898</cite></p>
+</blockquote>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/lawn-tennis-logo.jpg" alt="Lawn Tennis Logo"></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Brief History of Tennis Prediction</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li><p>For most of its history, tennis has lacked formal models to predict wins</p></li>
+<li><p>Around 2000, the first quantitative approaches for prediction began to appear </p></li>
+<li><p>Since then a number of models have been published</p></li>
+<li><p>In this talk, I will categorize models into 3 broad classes:</p>
+
+<ul>
+<li>Point-based</li>
+<li>Regression-based</li>
+<li>Other</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>The Validation Problem</h2>
+  </hgroup>
+  <article data-timings="">
+    <blockquote>
+<p>Though these forecasts are fascinating, what is really needed is a comparison of the forecasting accuracy of various methods. Then we can judge which forecasts to use in our fantasy leagues, draft decisions, or player personnel decisions. For example, who predicts future baseball performance better: Ron Shandler or Bill James? Perhaps in the future databases of accuracy of sports forecasts (and stock pickers) will be commonplace on the Internet.</p>
+
+<p><cite>W. L. Winston, <em>Mathletics: How Gamblers, Managers, and Sports Enthusiasts Use Mathematics in Baseball, Basketball, and Football</em> </cite></p>
+</blockquote>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>The Validation Problem</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>As sports analysts and fans, we think a lot about performance and how athletes stack up against their competitors</p></li>
+<li><p>Yet, attention to the comparative performance of prediction models in sport is often absent (at least from scholarly literature)</p></li>
+<li><p>Tennis is no exception</p></li>
+</ul>
+
+<div style='float:left;width:48%;' class='centered'>
+  
+</div>
+<div style='float:right;width:48%;'>
+  
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Case for Validation</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li><p>Distinguishing better models from worse models can help shed light on determinants of wins</p></li>
+<li><p>It is also important for improving future forecasts for the sport</p></li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="http://img.khelnama.com/sites/default/files/mediaimages/gallery/2012/Aug/RTR368C6.jpg" width="350" height="250" /></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Objectives &amp; Design Overview</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li><p>The purpose of this study was to identify published models to predict the winner of a professional singles match in tennis</p></li>
+<li><p>The study design had 3 phases:</p>
+
+<ol>
+<li>Search for prediction models</li>
+<li>Fitting model parameters from the same set of match training data</li>
+<li>Evaluating model performance against an independent set of match data</li>
+</ol></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <article data-timings="">
+    <div class="alert alert-info">
+<h2>Tennis Prediction Models</h2>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Search for Prediction Models</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li><p>Review of abstracts for relevant articles identified from Google Scholar and their citations </p></li>
+<li><p>17 articles were screened with exclusion criteria</p></li>
+<li><p>10 models were included in the validation analysis</p></li>
+<li><p><b>Causes for Exclusion</b></p>
+
+<ul>
+<li>Not sufficient information to replicate (2 articles)</li>
+<li>Not a forecasting model (2 articles)</li>
+<li>Concerned previously published model (2 articles)</li>
+<li>Required within-match updating (1 article)</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Point-Based Models</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li><p>Four of the included models are or are extensions of the basic iid model proposed by Newton and Keller, which assumes that points won on serve and return are independent and identically distributed (iid) Bernoulli trials</p></li>
+<li><p>Given the probability of winning a point on serve and return, explicit formulae can be derived for the probability of winning a game, tiebreak, set, and match </p></li>
+<li><p>The models differ in how the probabilities of serve and return are estimated</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Point-Based Models</h2>
+  </hgroup>
+  <article data-timings="">
+    <table><thead>
+<tr>
+<th align="center">Model</th>
+<th align="center">Developer</th>
+<th align="center">Serve and Return Probabilities</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">Basic iid</td>
+<td align="center">Newton and Keller, 2005</td>
+<td align="center">Player-specific average</td>
+</tr>
+<tr>
+<td align="center">Opponent-adjusted iid</td>
+<td align="center">Barnett and Clarke, 2005</td>
+<td align="center">Average with correction for opponent serve and return ability</td>
+</tr>
+<tr>
+<td align="center">Low-level iid</td>
+<td align="center">Spanias and Knottenbelt, 2012</td>
+<td align="center">Estimated from component events (aces, first serve wins, etc.)</td>
+</tr>
+<tr>
+<td align="center">Common opponent iid</td>
+<td align="center">Knottenbelt et al., 2012</td>
+<td align="center">Serve and return averages among a common set of opponents</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Regression-based Models</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li><p>Four models propose a regression relationship between predictors and the probability of winning a match</p></li>
+<li><p>Unlike point-based models, these model a match win directly and make no assumptions about characteristics of points within a match</p></li>
+<li><p>The models differ in the set of predictors included though ALL include player rank/seeding in some form</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Regression-based Models</h2>
+  </hgroup>
+  <article data-timings="">
+    <table><thead>
+<tr>
+<th align="center">Model</th>
+<th align="center">Developer</th>
+<th align="center">Distribution</th>
+<th align="center">Predictors</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">Logistic</td>
+<td align="center">Klaassen and Magnus, 2003</td>
+<td align="center">Logistic</td>
+<td align="center">Rank differntial</td>
+</tr>
+<tr>
+<td align="center">Basic probit</td>
+<td align="center">Boulier and Stekler, 1999</td>
+<td align="center">Probit</td>
+<td align="center">Seeding differential</td>
+</tr>
+<tr>
+<td align="center">Probit plus</td>
+<td align="center">Del Corral and Prieto-Rodriguez, 2010</td>
+<td align="center">Probit</td>
+<td align="center">Player-opponent differences in rank, demographics</td>
+</tr>
+<tr>
+<td align="center">Prize probit</td>
+<td align="center">Gilsdorf and Sukhatme, 2008</td>
+<td align="center">Probit</td>
+<td align="center">Potential loss in prize money, head-to-head results, demographics</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Regression Model Predictors</h2>
+  </hgroup>
+  <article data-timings="">
+    <table><thead>
+<tr>
+<th align="center">Predictor</th>
+<th align="center">Logistic</th>
+<th align="center">Basic probit</th>
+<th align="center">Probit plus</th>
+<th align="center">Prize Probit</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">Difference in seeds</td>
+<td align="center">+</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Difference in ranks</td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Previous tournament result</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Former top 10 player</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Difference in age</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">Difference in height</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Handedness</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Potential prize earnings</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">Head-to-head wins</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">Head-to-head losses</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">Difference in rank points</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">Difference in career wins</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">Rounds remaining</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">Grand Slam indicator</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">Masters 1000 indicator</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Other Models</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>There were 2 additional models that do not fit within either the point- or regression-based classes</li>
+</ul>
+
+<p><br/></p>
+
+<table><thead>
+<tr>
+<th align="center">Model</th>
+<th align="center">Developer</th>
+<th align="center">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">Bradley-Terry</td>
+<td align="center">McHale and Morton, 2011</td>
+<td align="center">Probability of a win is equal to relative ability; Abilities are estimated from game wins over 6 or more months of matchplay</td>
+</tr>
+<tr>
+<td align="center">BCM</td>
+<td align="center">Leitner et al., 2009</td>
+<td align="center">Average of multiple bookmaker predictions</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Previous Performance Findings</h2>
+  </hgroup>
+  <article data-timings="">
+    <table><thead>
+<tr>
+<th align="center">Model</th>
+<th align="center">Performance Testing in Original Paper</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">Basic iid</td>
+<td align="center">Illustration with WTA and ATP 2002 US Open</td>
+</tr>
+<tr>
+<td align="center">Opponent-adjusted iid</td>
+<td align="center">Illustration with one match</td>
+</tr>
+<tr>
+<td align="center">Low-level iid</td>
+<td align="center">Applied to 2011 ATP season; 66% predictive accuracy</td>
+</tr>
+<tr>
+<td align="center">Common opponent iid</td>
+<td align="center">Favorable ROI when applied to 2011 Grand Slams</td>
+</tr>
+<tr>
+<td align="center">Logistic</td>
+<td align="center">None</td>
+</tr>
+<tr>
+<td align="center">Basic probit</td>
+<td align="center">Brier Score of 0.17 for 1986-1995 Grand Slams</td>
+</tr>
+<tr>
+<td align="center">Probit plus</td>
+<td align="center">Applied to 2009 Australian Open; Brier score of 0.18</td>
+</tr>
+<tr>
+<td align="center">Prize probit</td>
+<td align="center">Applied to 2001 ATP season; 64% predictive accuracy</td>
+</tr>
+<tr>
+<td align="center">Bradley-Terry</td>
+<td align="center">Favorable ROI for 2005-2008 ATP seasons</td>
+</tr>
+<tr>
+<td align="center">BCM</td>
+<td align="center">None</td>
+</tr>
+</tbody></table>
+
+<p><br/></p>
+
+<p>ROI = Return on investment</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <article data-timings="">
+    <div class="alert alert-info">
+<h2>Comparative Performance</h2>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Validation Data - Estimation</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li>Parameters were based on match outcomes for the 52 weeks prior to the match being predicted</li>
+<li>For predictors that specifically required a longer period than 1-year (e.g. &#39;career wins&#39;), the specified time period was used</li>
+<li>Match data included all tournaments above the Challenger level</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Validation Data - Testing</h2>
+  </hgroup>
+  <article data-timings="">
+    <table><thead>
+<tr>
+<th align="left">Characteristic</th>
+<th align="center">Count</th>
+<th align="center">Percentage</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">Total Matches</td>
+<td align="center">2,443</td>
+<td align="center">100</td>
+</tr>
+<tr>
+<td align="left">Higher Rank Wins</td>
+<td align="center">1,663</td>
+<td align="center">68.1</td>
+</tr>
+<tr>
+<td align="left">Series</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">Grand Slams</td>
+<td align="center">490</td>
+<td align="center">20.1</td>
+</tr>
+<tr>
+<td align="left">Masters</td>
+<td align="center">559</td>
+<td align="center">22.9</td>
+</tr>
+<tr>
+<td align="left">Other</td>
+<td align="center">1,394</td>
+<td align="center">57.0</td>
+</tr>
+<tr>
+<td align="left">Surface</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">Clay</td>
+<td align="center">838</td>
+<td align="center">34.3</td>
+</tr>
+<tr>
+<td align="left">Grass</td>
+<td align="center">286</td>
+<td align="center">11.7</td>
+</tr>
+<tr>
+<td align="left">Hard</td>
+<td align="center">1,319</td>
+<td align="center">54.0</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Performance Evaluation</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li><p>Calibration</p></li>
+<li><p>Discrimination</p>
+
+<ul>
+<li>AUC</li>
+<li>Mean probability difference</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <article data-timings="">
+    <div class="alert alert-info">
+<h2>Performance Findings</h2>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Calibration</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/unnamed-chunk-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Discrimination: AUC</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/unnamed-chunk-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>Discrimination: Mean Probability Difference</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>Conclusions</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li><p>Prediction models in tennis are <em>not</em> created equal </p></li>
+<li><p>Regression-based models generally had better accuracy than point-based models</p></li>
+<li><p>Calibration was generally good but there was a wide range in discriminatory performance</p></li>
+<li><p>The <u>Prize probit model</u> had excellent accuracy and superior discriminatory power compared to competitors </p></li>
+<li><p>Factors like prize earnings and head-to-head outcomes have important predictive value even after account for player rankings</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title=''>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Predicting Wins in Tennis'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Brief History of Tennis Prediction'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='The Validation Problem'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='The Validation Problem'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Case for Validation'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Objectives &amp; Design Overview'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title=''>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Search for Prediction Models'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Point-Based Models'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Point-Based Models'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Regression-based Models'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Regression-based Models'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Regression Model Predictors'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Other Models'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Previous Performance Findings'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title=''>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Validation Data - Estimation'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Validation Data - Testing'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Performance Evaluation'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title=''>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Calibration'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Discrimination: AUC'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='Discrimination: Mean Probability Difference'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='Conclusions'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title=''>
+         26
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

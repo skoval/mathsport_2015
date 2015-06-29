@@ -1,0 +1,75 @@
+.alert-info {
+  background-color: #CBE7A5;
+  margin-top: 30%;
+  padding: 5%;
+  text-align: center;
+}
+
+/* Styles for Title Slide */
+.title-slide hgroup > h1 {
+  font-family: 'Spinnaker', cursive;
+}
+
+.title-slide hgroup > h2 {
+  font-family: 'Spinnaker', cursive;
+}
+
+.title-slide hgroup > p {
+  font-family: 'Spinnaker', cursive;
+  font-size: 32px;
+}
+
+/* Fonts and Spacing */
+article p, article li, article li.build, section p, section li{
+  font-family: 'Spinnaker', cursive;
+  font-size: 28px;
+}
+
+slide:not(.segue) h2{
+  font-family: 'Spinnaker', cursive;
+  padding-bottom: 3%;
+}
+
+
+/* Tables */
+table caption{
+  font-family: "Asap", sans-serif;
+}
+
+/* Tables */
+
+table {
+  border: none;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 24px;
+  line-height: 32px;
+  font-family: 'Trebuchet MS';
+  font-weight: bolder;
+  color: rgb(102, 102, 102);
+}
+
+ol li {
+  font-family: 'Spinnaker', cursive;
+}
+
+/* Pasted from Custom.css */
+aside.gbar img {
+  width: 175px;
+}
+
+
+body {
+  font-family: 'Spinnaker', cursive;
+}
+
+slide.segue h2{
+ font-family: 'Spinnaker', cursive;
+ }
+
+slide:not(.segue)  h2{
+ font-family: 'Spinnaker', cursive;
+}
+article p {
+  font-family: 'Spinnaker', cursive;
+}
